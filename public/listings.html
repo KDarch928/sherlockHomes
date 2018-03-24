@@ -45,10 +45,54 @@
         <div class="container my-auto">
             <div class="row">
                 <div class="col-lg-12 my-auto">
-                    <h1>
+                    <p1 id="title">
                         Listings
-                    </h1>
+                    </p1>
                    
+                    <div id="property-view"></div>
+                    <!-- Find a rental address -->
+                    <form id="property-form" action="/testRoute" method="POST">
+                   
+                      <label for="property-input">City</label>
+                      <input type="text" id="city-input" name="city">
+                      <br>
+                      <label for="property-input">State</label>
+                      <input type="text" id="state-input" name="state">
+                      <br>
+                      <input id="find-property" type="submit" value="Property Search">
+
+                      <script>
+
+                        var state = $("#state-input").val().trim();
+                        var city = $("#city-input").val().trim();
+                   
+                        $("#property-form").on("sumbit", function() {
+                          console.log("clicked")
+                          var queryURL = "localhost:3000/testRoute"
+                        //
+                        //
+                        //
+                        $.ajax({
+                          url: queryURL,
+                          method: "POST",
+                          body: {
+                            state,
+                            city
+                          }
+                        }).then(function(response) {
+                          console.log(response)
+                          // $("#property-view").text(JSON.stringify(response));
+                        });
+                        })
+                   
+                        // $(document).ready(function(){
+                   
+                        //
+                        //            // -----------------------------------------------------------------------
+                        //
+                        //          });
+                      </script>
+
                 </div>
                
 
@@ -60,7 +104,7 @@
 
     
     
-    <div class="count-particles"> <span class="js-count-particles"></div> <!-- particles.js lib - https://github.com/VincentGarreau/particles.js --> 
+    <!-- <div class="count-particles"> <span class="js-count-particles"></div> particles.js lib - https://github.com/VincentGarreau/particles.js  -->
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
 crossorigin="anonymous"></script>
