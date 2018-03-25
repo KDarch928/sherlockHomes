@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>SherlockHomes</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous">
+    <link rel="stylesheet" type="text/css" href="style.css">
+    <!-- Google Font Megrim -->
+    <link href="https://fonts.googleapis.com/css?family=Megrim" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css?family=Share+Tech" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css?family=Gloria+Hallelujah" rel="stylesheet">
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" />
+</head>
+
+<body>
+
+<nav class="navbar navbar-toggleable-md navbar-light bg-faded" style="background-color: rgb(112, 112, 112);">
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <a class="navbar-brand" href="index.html">SherlockHomes</a>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav">
+            <li class="nav-item active">
+                <a class="nav-link" href="index.html">Home <span class="sr-only">(current)</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/listings.html">Listings</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/blog.html">Blog</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/login.html">Login</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+
+
+<div id="particles-js"></div> <!-- stats - count particles -->
+
+<header class="startup text-center text-white d-flex">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-12 my-auto">
+                <p1 id="title">
+                    Welcome to Sherlock Homes Admin Page
+                </p1>
+
+                <div id="property-view"></div>
+                <!-- log into your account -->
+                <form id="user-form" action="/testRoute" method="POST">
+
+                    <label for="username-input">Email</label>
+                    <input type="text" id="username-input" name="username">
+                    <br>
+                    <label for="pwd-input">Password</label>
+                    <input type="password" id="pwd-input" name="pwd">
+                    <br>
+                    <input type="checkbox" onclick="showPwd()">Show Password
+                    <br>
+                    <input id="find-user" type="submit" value="Log In">
+                    <br>
+                    <br>
+                    <a href="/signup">New to Sherlock Homes? &nbsp;
+                        <span>Sign Up</span>
+                    </a>
+                </form>
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+
+</header>
+
+
+
+<!-- <div class="count-particles"> <span class="js-count-particles"></div> particles.js lib - https://github.com/VincentGarreau/particles.js  -->
+
+<script type="text/javascript">
+
+    function showPwd() {
+        var x = document.getElementById("pwd-input");
+        if (x.type === "password"){
+            x.type = "text";
+        } else {
+            x.type = "password";
+        }
+    }
+
+    var usrNam = $("#username-input").val().trim();
+    var pwd = $("#pwd-input").val().trim();
+
+    var queryURL = "/adminPortal"
+
+    $("#user-form").on("sumbit", function() {
+
+        $.ajax({
+            url: queryURL,
+            method: "POST",
+            body: {
+                usrNam,
+                pwd
+            }
+        }).then(function (response) {
+            console.log(response)
+            // location.reload();
+        });
+    });
+
+</script>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
+<script src="http://cdn.jsdelivr.net/particles.js/2.0.0/particles.min.js"></script> <!-- stats.js lib -->
+<script type="text/javascript" src="app.js"></script>
+<script src="http://threejs.org/examples/js/libs/stats.min.js"></script>
+
+
+
+
+</body>
+
+</html>

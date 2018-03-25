@@ -11,5 +11,6 @@ CREATE TABLE mail_listing (
     password  varchar(100) null,
     date TIMESTAMP,
     PRIMARY KEY (id)
-)
-select * from mail_listing
+);
+
+select * from mail_listing;

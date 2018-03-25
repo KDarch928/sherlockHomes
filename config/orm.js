@@ -51,6 +51,42 @@ var orm = {
             cb(result);
         });
     },
+    //check if realtor exists
+    validateUsr: function (table, cols, vals, cb) {
+        var queryString = "SELECT * FROM " + table;
+        queryString += " WHERE ";
+        queryString += cols.toString();
+        queryString += " = (";
+        queryString += printQuestionMarks(vals.length);
+        queryString += ") ";
+
+        connection.query(queryString, vals, function (err, result){
+            if (err) {
+                throw err;
+            }
+            cb(result);
+        });
+    },
+    checkifUrsExist: function (table, cols, vals, cb) {
+        var queryString = "SELECT COUNT(*) AS total FROM " + table;
+        queryString += " WHERE ";
+        queryString += cols.toString();
+        queryString += " = (";
+        queryString += printQuestionMarks(vals.length);
+        queryString += ") ";
+
+        console.log(queryString);
+
+        connection.query(queryString, vals, function (err, result) {
+            console.log(result[0].total);
+            console.log(result);
+            // if (result[0].total === 1){
+            //
+            // }
+            cb(result);
+        });
+
+    },
     //adding a new user or mls listing to their table
     insert: function (table, cols, vals, cb) {
         var queryString = "INSERT INTO " + table;
