@@ -26,18 +26,27 @@ html {
   
   .navbar-brand {
     /* font-family: 'Gloria Hallelujah', cursive; */
-    font-family: 'Share Tech', sans-serif;
+    /* font-family: 'Share Tech', sans-serif; */
+    font-family: 'Faster One', cursive;
+    font-family: 'Bungee Outline', cursive;
+    font-family: 'Orbitron', sans-serif;
+    color: white;
   }
   
   .nav-link {
     /* font-family: 'Gloria Hallelujah', cursive; */
-    font-family: 'Share Tech', sans-serif;
+    /* font-family: 'Share Tech', sans-serif; */
+    font-family: 'Faster One', cursive;
+    font-family: 'Bungee Outline', cursive;
+    font-family: 'Orbitron', sans-serif;
     text-align: left;
   }
   
   #title {
-    font-family: 'Gloria Hallelujah', cursive;
-    font-size: 50px;
+    /* font-family: 'Gloria Hallelujah', cursive; */
+    font-family: 'Faster One', cursive;
+    font-family: 'Bungee Outline', cursive;
+    font-size: 75px;
     margin-top: 200px;
     /* font-family: 'Share Tech', sans-serif; */
   }
