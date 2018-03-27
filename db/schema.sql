@@ -10,7 +10,7 @@ CREATE TABLE realtor_list (
     last_name VARCHAR(100) NULL,
     password VARCHAR(100) NULL,
     company VARCHAR(100) NULL,
-    access VARCHAR(100) DEFAULT "user",
+    access_type VARCHAR(100) DEFAULT "user",
     date TIMESTAMP,
     PRIMARY KEY (id)
 );
