@@ -21,6 +21,8 @@
     "dotenv": "^5.0.1",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
-    "mysql": "^2.15.0"
+    "jquery": "^3.3.1",
+    "mysql": "^2.15.0",
+    "node-notifier": "^5.2.1"
   }
 }

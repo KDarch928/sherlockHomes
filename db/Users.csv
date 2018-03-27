@@ -1,5 +1,5 @@
-id ,email ,First name,Last name,Password,Company 
-1,john.doe@homes.com,John,Doe,Password1,Homes
-2,tom.smith@farms.com,Tom,Smith,Password2,Farms
-3,laine.hope@agents.com,Laine,Hope,Password3,Agents
-4,kate.berry@spot.com,Kate,Berry,Password4,Spot
+1,john.doe@homes.com,John,Doe,Password1,Homes,user,2018-03-24 23:45:06
+2,tom.smith@farms.com,Tom,Smith,Password2,Farms,user,2018-03-24 21:35:06
+3,laine.hope@agents.com,Laine,Hope,Password3,Agents,user,2018-03-24 19:42:06
+4,kate.berry@spot.com,Kate,Berry,Password4,Spot,user,2018-03-24 22:45:06
+5,jim.shoe@sherlockhomes.com,Jim,Shoe,Jim1,Sherlock Homes,admin,2018-02-10 10:30:30
