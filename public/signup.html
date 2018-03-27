@@ -56,7 +56,7 @@
                 <div id="property-view"></div>
                 <!-- create an account -->
                 <!--<form id="user-form" action="/admin" method="POST">-->
-                <form id="user-form">
+                <form id="signup-form">
 
                     <label for="first_name">First Name</label>
                     <input type="text" id="first_name" name="ftNam">
@@ -112,21 +112,25 @@
         }
     }
 
-    $("#user-form").on("submit", function(event) {
-        var usrNam = $("#username-input").val().trim();
-        var pwd = $("#pwd-input").val().trim();
+    $("#signup-form").on("submit", function(event) {
+        var ftNam = $("#first_name").val().trim();
+        var ltNam = $("#last_name").val().trim();
+        var comp = $("#company_name").val().trim();
+        var email = $("#email-input").val().trim();
+        var pwd = $("#pwd-input1").val().trim();
 
-        console.log(usrNam);
-        console.log(pwd);
-        var collectedData = {
-            username: usrNam,
+        var newUrsData = {
+            firstName: ftNam,
+            lastName: ltNam
+            company: comp,
+            email: email,
             pwd: pwd
         };
 
         // Send the post request.
-        $.ajax("/login", {
+        $.ajax("/signup", {
             type: "POST",
-            data: collectedData
+            data: newUrsData
         }).then(
             function() {
                 // Reload the page to get the updated list

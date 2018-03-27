@@ -3,14 +3,16 @@ CREATE database home_db;
 
 USE home_db;
 
-CREATE TABLE mail_listing (
+CREATE TABLE realtor_list (
     id INT NOT NULL AUTO_INCREMENT,
     email VARCHAR(100),
-    firt_name varchar(100) NULL,
-    last_name varchar(100) null,
-    password  varchar(100) null,
+    first_name VARCHAR(100) NULL,
+    last_name VARCHAR(100) NULL,
+    password VARCHAR(100) NULL,
+    company VARCHAR(100) NULL,
+    access VARCHAR(100) DEFAULT "user",
     date TIMESTAMP,
     PRIMARY KEY (id)
 );
 
-select * from mail_listing;
+select * from realtor_list;

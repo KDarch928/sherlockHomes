@@ -8,7 +8,7 @@ var home = {
         });
     },
     checkifUrsExist: function (cols, vals, cb) {
-        orm.checkifUrsExist("mail_listing", cols, vals, function (res) {
+        orm.checkifUrsExist("realtor_list", cols, vals, function (res) {
             cb(res);
         });
         // orm.checkingUsr("mail_listing", cols, vals, function (res){
@@ -16,7 +16,7 @@ var home = {
         // });
     },
     validateUsrPwd: function (cols, vals, cb) {
-        orm.validateUsr("mail_listing", cols, vals, function (res){
+        orm.validateUsr("realtor_list", cols, vals, function (res){
             cb(res);
         });
     }
