@@ -110,6 +110,25 @@ html {
     cursor: pointer;
   }
    
+
+.card-header {
+  background-color: #49b5de;
+}
+
+.card {
+  background-color: rgb(112, 112, 112);
+  padding: 20px;
+  margin-top: 60px;
+  border-radius: 15px 50px 30px;
+}
+
+.cardBottom {
+  background-color: #9d9d9d;
+  padding: 20px;
+  margin-top: 20px;
+  margin-bottom: 130px;
+  border-radius: 15px 50px 30px;
+}
   
   .cardAbout {
     padding-top: 75px;

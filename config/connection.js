@@ -18,6 +18,7 @@ if (process.env.JAWSDB_URL){
         host: "localhost",
         user: "root",
         password: key.mysqlaccess.access,
+        // passqord: "",
         database: "home_db"
     });
 };
