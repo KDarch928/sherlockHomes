@@ -1,10 +1,12 @@
 var express = require("express");
+var request = require("request");
 
 var home = require("../models/homesModel");
 
 var router = express.Router();
 
 var notifier = require('node-notifier');
+
 
 //create all routes
 
@@ -37,7 +39,15 @@ router.get("/login",function (req,res) {
 });
 
 router.get("/signup", function (req, res) {
-    res.render("singup");
+    res.render("signup");
+});
+
+router.get("/listings", function (req, res) {
+    res.render("listing");
+});
+
+router.get("/blog", function (req, res) {
+    res.render("blog");
 });
 
 //all post routes
@@ -93,6 +103,36 @@ router.post("/login", function (req, res) {
 });
 
 router.post("/signup", function (req, res) {
+
+});
+
+//post router on getting property API
+router.post("/testRoute", function (req, res) {
+    console.log(req.body);
+    console.log("post route fired");
+    var state = req.body.state;
+    var city = req.body.city;
+    var zipcode = req.body.zipcode;
+
+    var baseURL = 'https://search.onboard-apis.com/propertyapi/v1.0.0/assessment/detail?postalcode=' + zipcode;
+
+    //===============================================================================================================================================
+
+
+    request({
+        url: baseURL,
+        method: "GET",
+        headers: {
+            apikey: "4b1160e947405c82fcd5633d6fa81929",
+            accept: "application/json"
+        }
+    }, function (error, response, body) {
+        // console.log(response)
+        // console.log(body)
+        return res.send(body);
+
+    });
+
 
 });
 
