@@ -89,7 +89,9 @@ html {
     font-weight: 700;
     text-transform: uppercase;
     border-radius: 300px;
-    font-family: 'Montserrat', sans-serif;
+    font-family: 'Faster One', cursive;
+    font-family: 'Bungee Outline', cursive;
+    font-family: 'Orbitron', sans-serif;
   }
   
   .btn-xl {
@@ -143,11 +145,70 @@ html {
   img {
     width: 300px;
     height: 150px;
-    margin: 10px;
+    /* margin: 10px; */
     transition: all 1s;
   }
   
   img:hover {
-    transform: scale(1.1);
+    /* transform: scale(1.1); */
+  }
+
+  #blogContent {
+    font-size: 18px;
+    font-family: 'Share Tech', sans-serif;
+  }
+
+  #city-input {
+    margin-left: 6px;
+  }
+
+  #username-input {
+    margin-left: 18px;
   }
   
+  #find-property {
+    background-color: #49b5de;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 300px;
+    font-family: 'Share Tech', sans-serif;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  #find-user {
+    background-color: #49b5de;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 300px;
+    font-family: 'Share Tech', sans-serif;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+  }
+
+  #first_name {
+    margin-left: 33px;
+  }
+
+  #last_name {
+    margin-left: 33px;
+  }
+  #company_name {
+    margin-left: 10px;
+  }
+  #email-input {
+    margin-left: 55px;
+  }
+  #pwd-input1 {
+    margin-left: 122px;
+  }
+
+  #pwd-input2 {
+    margin-left: 85px;
+  }
+
+ /* #checkboxSign{
+   margin-left: 10px;
+ } */
