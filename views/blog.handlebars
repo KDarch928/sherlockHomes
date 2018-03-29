@@ -15,11 +15,11 @@
                         <!-- <img class="img-fluid rounded" src="images/football.jpg" alt=""> -->
                         <img src="assets/images/house1.jpg" alt="Bio" class="responsive" width="400" height="200">
                         <!-- <div class="img" id=image1 style="height:200px;"></div> -->
-                        <p>Evanston market trends indicate a decrease of $4,000 (-1%) in median home sales over the past year. The average price per square foot for this same period rose to $313, up from $301.</p>
-                        <p>Could Evanston, IL be your next home? Kick-start your search with Trulia’s real estate guide and home search. With interactive maps and charts, Trulia provides a comprehensive overview of market trends, schools, demographics, and lifestyle data to help you learn all about Evanston. Not sure which neighborhood is for you? Check out our Nearby Places section below to explore popular cities near Evanston such as Wilme...tte and Skokie. When you’re ready, Trulia has 270 resale and new homes in Evanston lined up for you, including open houses, and homes in the pre-foreclosure, auction, or bank-owned stages of the foreclosure process.
+                        <p id="blogContent">Evanston market trends indicate a decrease of $4,000 (-1%) in median home sales over the past year. The average price per square foot for this same period rose to $313, up from $301.</p>
+                        <p id="blogContent">Could Evanston, IL be your next home? Kick-start your search with Trulia’s real estate guide and home search. With interactive maps and charts, Trulia provides a comprehensive overview of market trends, schools, demographics, and lifestyle data to help you learn all about Evanston. Not sure which neighborhood is for you? Check out our Nearby Places section below to explore popular cities near Evanston such as Wilme...tte and Skokie. When you’re ready, Trulia has 270 resale and new homes in Evanston lined up for you, including open houses, and homes in the pre-foreclosure, auction, or bank-owned stages of the foreclosure process.
                         </p>
                         <!-- Comments Form -->
-                        <div class="card my-4">
+                        {{!-- <div class="card my-4">
                             <h5 class="card-header">Leave a Comment:</h5>
                             <div class="card-body">
                                 <form>
@@ -29,13 +29,34 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
+                        <div id="disqus_thread"></div>
+                            <script>
+
+                            /**
+                            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                            /*
+                            var disqus_config = function () {
+                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            };
+                            */
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://sherlockhomes.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                            })();
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+
                     </div>
                 </div>
 
             </div>
 
-            <div class="container">
+            {{!-- <div class="container">
                 <div class="content">
                     <div class="card">
                         <h2>Chicago Real Estate Market Overview</h2>
@@ -47,7 +68,7 @@
                         </p>
 
                         <!-- Comments Form -->
-                        <div class="card my-4">
+                        {{!-- <div class="card my-4">
                             <h5 class="card-header">Leave a Comment:</h5>
                             <div class="card-body">
                                 <form>
@@ -57,12 +78,35 @@
                                     <button type="submit" class="btn btn-primary">Submit</button>
                                 </form>
                             </div>
-                        </div>
+                        </div> --}}
+                        <div id="disqus_thread"></div>
+                            <script>
+
+                            /**
+                            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables*/
+                            /*
+                            var disqus_config = function () {
+                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                            };
+                            */
+                            (function() { // DON'T EDIT BELOW THIS LINE
+                            var d = document, s = d.createElement('script');
+                            s.src = 'https://sherlockhomes.disqus.com/embed.js';
+                            s.setAttribute('data-timestamp', +new Date());
+                            (d.head || d.body).appendChild(s);
+                            })();
+                            </script>
+                            <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+                                                        
+
+
                     </div>
 
                 </div>
 
-            </div>
+            </div> --}}
 
             <!-- interesting my button is not going through with github it is aligning left -->
             <!--End mc_embed_signup-->
@@ -72,3 +116,5 @@
     </div>
 
 </header>
+
+<script id="dsq-count-scr" src="//sherlockhomes.disqus.com/count.js" async></script>
