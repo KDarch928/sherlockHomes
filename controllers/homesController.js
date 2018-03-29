@@ -107,12 +107,15 @@ router.post("/signup", function (req, res) {
 });
 
 //post router on getting property API
-router.post("/testRoute", function (req, res) {
+router.post("/listings", function (req, res) {
     console.log(req.body);
     console.log("post route fired");
+
+    var addr = req.body.addr;
+    var apt = req.body.apt;
     var state = req.body.state;
     var city = req.body.city;
-    var zipcode = req.body.zipcode;
+    var zipcode = req.body.zip;
 
     var baseURL = 'https://search.onboard-apis.com/propertyapi/v1.0.0/assessment/detail?postalcode=' + zipcode;
 
@@ -127,9 +130,9 @@ router.post("/testRoute", function (req, res) {
             accept: "application/json"
         }
     }, function (error, response, body) {
-        // console.log(response)
-        // console.log(body)
-        return res.send(body);
+        // console.log(body);
+        return res.send({result: "redirect", url: "/listings", data: body});
+        //return res.status(200).send({result: "redirect", url: "/listings", data: body});
 
     });
 
