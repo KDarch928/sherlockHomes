@@ -11,25 +11,25 @@
                 <!--<form id="user-form" action="/admin" method="POST">-->
                 <form id="signup-form">
 
-                    <label for="first_name">First Name</label>
+                    <label id="firstLabel" for="first_name">First Name</label>
                     <input type="text" id="first_name" name="ftNam">
                     <br>
-                    <label for="last_name">Last Name</label>
+                    <label id="firstLabel2" for="last_name">Last Name</label>
                     <input type="text" id="last_name" name="ltNam">
                     <br>
-                    <label for="company_name">Company Name</label>
+                    <label id="firstLabel3" for="company_name">Company Name</label>
                     <input type="text" id="company_name" name="company">
                     <br>
-                    <label for="email-input">Email</label>
+                    <label id="firstLabel4" for="email-input">Email</label>
                     <input type="text" id="email-input" name="email">
                     <br>
-                    <label for="pwd-input1">Password</label>
+                    <label id="firstLabel5" for="pwd-input1">Password</label>
                     <input type="password" id="pwd-input1" name="pwd" required>
                     <input type="checkbox" onclick="showPwd('pwd-input1')">Show Password
                     <br>
-                    <label for="pwd-input2">Confirm Password</label>
+                    <label id="firstLabel6" for="pwd-input2">Confirm Password</label>
                     <input type="password" id="pwd-input2" name="pwd" required>
-                    <input type="checkbox" onclick="showPwd('pwd-input2')">Show Password
+                    <input id="checkboxSign" type="checkbox" onclick="showPwd('pwd-input2')">Show Password
                     <br>
                     <input id="find-user" type="submit" value="Sign Up">
                 </form>
