@@ -25,6 +25,9 @@
 
                 <h4>Created Blogs</h4>
                 <div id="blog-area">
+                    {{#each blogs}}
+                        <div>{{this.blog_content}}</div>
+                    {{/each}}
 
                 </div>
 
@@ -40,60 +43,7 @@
 
 <script type="text/javascript">
 
-    // $("#blog-form").on("submit", function(event) {
-    //     event.preventDefault();
-    //
-    //     var head = $("#header-input").val().trim();
-    //     var title = $("#title-input").val().trim();
-    //     var cont = $("#content-input").val().trim();
-    //     var cont2 = $("#content2-input").val().trim();
-    //
-    //
-    //
-    //
-    //     var newBlog = {
-    //         header: head,
-    //         title: title,
-    //         cont: cont,
-    //         cont2: cont2
-    //     };
-    //     // console.log(json(collectedSearchData));
-    //
-    //     // Send the post request.
-    //     $.ajax("/blog/new", {
-    //         type: "POST",
-    //         data: collectedData
-    //     }).done( function(response) {
-    //
-    //         console.log(response);
-    //     });
-    // });
-
-    $.get("/admin", function(data) {
-
-        console.log(data);
-
-        // if (data.length !== 0) {
-        //
-        //     for (var i = 0; i < data.length; i++) {
-        //
-        //         var row = $("<div>");
-        //         row.addClass("blog");
-        //
-        //         row.append("<p>" + data[i].header + " </p>");
-        //         row.append("<p>" + data[i].title + "</p>");
-        //         row.append("<p>" + data[i].created_at + "</p>");
-        //         row.append("<p>" + data[i].cont + "</p>");
-        //
-        //         $("#blog-area").prepend(row);
-        //
-        //     }
-        //
-        // }
-
-    });
-
-    // When user chirps (clicks addBtn)
+// When user chirps (clicks addBtn)
     $("#blog-form").on("submit", function(event) {
         event.preventDefault();
 
@@ -111,14 +61,12 @@
             cont: content
         };
 
-        console.log(newBlog);
 
         // Send an AJAX POST-request with jQuery
         $.post("/admin/newblog", newBlog)
         // On success, run the following code
                 .then(function() {
 
-                    console.log(newBlog);
 
                     var row = $("<div>");
                     row.addClass("blog");
