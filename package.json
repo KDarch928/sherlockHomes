@@ -24,6 +24,7 @@
     "jquery": "^3.3.1",
     "mysql": "^2.15.0",
     "node-notifier": "^5.2.1",
+    "particlesjs": "^2.2.2",
     "request": "^2.85.0"
   }
 }
