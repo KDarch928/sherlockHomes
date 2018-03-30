@@ -14,13 +14,8 @@
                     <label for="title-input">Blog Title</label>
                     <input type="text" id="title-input" name="title">
                     <br>
-                    <label for="content-input">Content</label>
-                    <input type="text" id="content-input" name="content" required>
-                    <br>
-                    <textarea class="form-control" rows="3" id="test-input"></textarea>
-                    <br>
-                    <label for="content2-input">Additional Content</label>
-                    <input type="text" id="content2-input" name="content2">
+                    <label for="content-input">Message</label>
+                    <textarea class="form-control" rows="3" id="content-input"></textarea>
                     <br>
                     <input id="postBlog" type="submit" value="Post">
                     <!--<button id="blog-submit" class="btn btn-sm">Submit!</button>-->
@@ -106,7 +101,6 @@
         var title = $("#title-input").val().trim();
         var created = moment().format("MMMM DD, YYYY");
         var content = $("#content-input").val().trim();
-        var content2 = $("#content2-input").val().trim();
 
         // Make a newBlog object
 
@@ -114,8 +108,7 @@
             header: head,
             title: title,
             created_at: created,
-            cont: content,
-            cont2: content2
+            cont: content
         };
 
         console.log(newBlog);
@@ -134,7 +127,6 @@
                     row.append("<p>" + newBlog.title + "</p>");
                     row.append("<p>" + newBlog.created_at + "</p>");
                     row.append("<p>" + newBlog.cont + "</p>");
-                    row.append("<p>" + newBlog.cont2 + "</p>");
 
                     $("#blog-area").prepend(row);
 
@@ -144,7 +136,6 @@
         $("#header-input").val("");
         $("#title-input").val("");
         $("#content-input").val("");
-        $("#content2-input").val("");
 
     });
 

@@ -34,6 +34,7 @@ router.get("/admin", function (req, res) {
         var blogData = {
             blog: data
         }
+        console.log(blogData);
         res.render("admin", blogData);
     });
     //res.render("admin");
