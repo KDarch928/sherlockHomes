@@ -29,11 +29,24 @@ router.get("/realtor/:name", function (req, res) {
 router.get("/admin", function (req, res) {
     // notifier.notify("Successfully Logged In");
     home.allBlogs(function (data) {
-
+        console.log(data);
         var hbsObject = {
             blogs: data
         };
         res.render("admin", hbsObject);
+    });
+
+    notifier.notify("Successfully Logged In");
+});
+
+router.get("/adminRouteData", function (req, res) {
+    // notifier.notify("Successfully Logged In");
+    home.allBlogs(function (data) {
+        console.log(data);
+        var hbsObject = {
+            blogs: data
+        };
+
     });
 
     notifier.notify("Successfully Logged In");
@@ -86,7 +99,7 @@ router.post("/login", function (req, res) {
 
                             if(result[0].access_type === "admin"){
 
-                                return res.status(200).send({result: "redirect", url: "/admin"});
+                                // return res.status(200).send({result: "redirect", url: "/admin"});
                             } else {
                                 var name = result[0].first_name + " " + result[0].last_name;
                                 return res.status(200).send({result: "redirect", url: "/realtor/"+ name});

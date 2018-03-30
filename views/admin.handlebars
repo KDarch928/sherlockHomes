@@ -25,6 +25,9 @@
 
                 <h4>Created Blogs</h4>
                 <div id="blog-area">
+                    {{#each blogs}}
+                            <div>{{this.blog_content}}</div>
+                        {{/each}}
 
                 </div>
 
@@ -40,31 +43,43 @@
 
 <script type="text/javascript">
 
+//    $.ajax({
+//        type: "GET",
+//        // data: {
+//        //     author: name,
+//        //     chirp: text
+//        // },
+//        url: "/adminRoute"
+//    }).then(function (res){
+//        console.log(res);
+//    })
 
-    $.get("/admin", function(data) {
 
-
-        // console.log(data);
-        // if (data.length !== 0) {
-        //
-        //     for (var i = 0; i < data.length; i++) {
-        //
-        //         var row = $("<div>");
-        //         row.addClass("blog");
-        //
-        //         row.append("<p>" + data[i].header + " </p>");
-        //         row.append("<p>" + data[i].title + "</p>");
-        //         row.append("<p>" + data[i].created_at + "</p>");
-        //         row.append("<p>" + data[i].cont + "</p>");
-        //         row.append("<p>" + data[i].cont2 + "</p>");
-        //
-        //         $("#blog-area").prepend(row);
-        //
-        //     }
-        //
-        // }
-
-    });
+    // $.get({url: "/adminRouteData",
+    //        dataType: "application/json; charset=utf-8"}, function(req, res) {
+    //
+    // console.log(req)
+    //     // console.log(res);
+    //     // if (data.length !== 0) {
+    //     //
+    //     //     for (var i = 0; i < data.length; i++) {
+    //     //
+    //     //         var row = $("<div>");
+    //     //         row.addClass("blog");
+    //     //
+    //     //         row.append("<p>" + data[i].header + " </p>");
+    //     //         row.append("<p>" + data[i].title + "</p>");
+    //     //         row.append("<p>" + data[i].created_at + "</p>");
+    //     //         row.append("<p>" + data[i].cont + "</p>");
+    //     //         row.append("<p>" + data[i].cont2 + "</p>");
+    //     //
+    //     //         $("#blog-area").prepend(row);
+    //     //
+    //     //     }
+    //     //
+    //     // }
+    //
+    // });
 
     // When user chirps (clicks addBtn)
     $("#blog-form").on("submit", function(event) {
