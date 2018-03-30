@@ -136,9 +136,21 @@ router.post("/testRoute", function (req, res) {
         // console.log(response)
         var body = JSON.parse(body);
         var data = body.property.map(function(p) {
-            return p.address.oneLine
+            return {
+                // property: p,
+                address: p.address.oneLine,
+                marketValue: p.assessment.market.mktttlvalue,
+                Taxes: p.assessment.tax.taxamt,
+                yearBuilt: p.summary.yearbuilt
+            }
+            
         })
-        res.json(data)
+        // var data1 = body.property.map(function(p) {
+        //     return p.assessment.market.mktttlvalue
+            
+        // })
+        res.json(data);
+        // res.json(data1);
         // res.send(JSON.parse(body))
     //    var propertiesArray = JSON.parse(body).property;
     //    // console.log(propertiesArray);
