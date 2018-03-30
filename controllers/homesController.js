@@ -27,25 +27,11 @@ router.get("/realtor/:name", function (req, res) {
 
 //sherlock homes admin page
 router.get("/admin", function (req, res) {
-    // notifier.notify("Successfully Logged In");
     home.allBlogs(function (data) {
         var blogData = {
-            blog: data
+            blogs: data
         }
         res.render("admin", blogData);
-    });
-
-    notifier.notify("Successfully Logged In");
-});
-
-router.get("/adminRouteData", function (req, res) {
-    // notifier.notify("Successfully Logged In");
-    home.allBlogs(function (data) {
-        console.log(data);
-        var hbsObject = {
-            blogs: data
-        };
-
     });
 
     notifier.notify("Successfully Logged In");
@@ -174,17 +160,6 @@ router.post("/listings", function (req, res) {
         })
 
         res.json(data);
-        // res.json(data1);
-        // res.send(JSON.parse(body))
-    //    var propertiesArray = JSON.parse(body).property;
-    //    // console.log(propertiesArray);
-
-    //     // res.json(propertiesArray);
-    //     // console.log(propertiesArray);
-
-    //     propertiesArray.forEach(function(property) {
-    //         res.json(property);
-    //     });
 
 
     });
