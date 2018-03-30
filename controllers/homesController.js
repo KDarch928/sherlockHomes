@@ -8,7 +8,7 @@ var router = express.Router();
 var notifier = require('node-notifier');
 
 
-//create all routes
+//create all route
 
 //all get routes
 
@@ -27,18 +27,15 @@ router.get("/realtor/:name", function (req, res) {
 
 //sherlock homes admin page
 router.get("/admin", function (req, res) {
-    // var name = req.params.name;
-    // console.log(name);
-    notifier.notify("Successfully Logged In");
     home.allBlogs(function (data) {
         var blogData = {
-            blog: data
+            blogs: data
         }
         console.log(blogData);
         res.render("admin", blogData);
     });
-    //res.render("admin");
-    // notifier.notify("Successfully Logged In");
+
+    notifier.notify("Successfully Logged In");
 });
 
 router.get("/login",function (req,res) {
@@ -63,15 +60,6 @@ router.get("/blog", function (req, res) {
     //res.render("blog", blogData);
 });
 
-// router.get("/admin/all", function (req, res) {
-//     home.allBlogs(function (data) {
-//         var blogData = {
-//             blog: data
-//         }
-//         res.render("admin", blogData);
-//     });
-//
-// });
 
 //all post routes
 
@@ -86,32 +74,30 @@ router.post("/login", function (req, res) {
             //if the user exist, then query the database. else redirect them to the sign up page
             if (result[0].total === 1){
 
+
                 //query the data and get users informaiton
                 home.validateUsrPwd(["email"],[
-                        req.body.username],
-                    function(result) {
+                    req.body.username],
+                function(result) {
 
-                        //if the username and pwd provide equal the same informin the database, then redirect them to the admin page
-                        //else redirect them back to the login page
-                        if (req.body.username === result[0].email && req.body.pwd === result[0].password) {
+                    //if the username and pwd provide equal the same informin the database, then redirect them to the admin page
+                    //else redirect them back to the login page
+                    if (req.body.username === result[0].email && req.body.pwd === result[0].password) {
 
-                            if(result[0].access_type === "admin"){
+                        if(result[0].access_type === "admin"){
 
-                                return res.status(200).send({result: "redirect", url: "/admin"});
-                            } else {
-                                var name = result[0].first_name + " " + result[0].last_name;
-                                return res.status(200).send({result: "redirect", url: "/realtor/"+ name});
-                                // res.send({redirect: "/realtor/" + name});
-                            }
-                            // var name = result[0].first_name + " " + result[0].last_name;
-                            // res.redirect("/realtor/" + name);
-                            // notifier.notify("Successfully Logged In");
+                            return res.status(200).send({result: "redirect", url: "/admin"});
                         } else {
+                            var name = result[0].first_name + " " + result[0].last_name;
+                            return res.status(200).send({result: "redirect", url: "/realtor/"+ name});
+                            // res.send({redirect: "/realtor/" + name});
+                        }
+                        // var name = result[0].first_name + " " + result[0].last_name;
+                        // res.redirect("/realtor/" + name);
+                        // notifier.notify("Successfully Logged In");                        } else {
                             notifier.notify("Wrong Password");
                             return res.status(200).send({result: "redirect", url: "/login"});
-                            //notifier.notify("Wrong Password");
-
-
+                            //notifier.notify("Wrong Password")
                         }
                     });
             } else {
@@ -125,9 +111,34 @@ router.post("/login", function (req, res) {
 
 });
 
-router.post("/signup", function (req, res) {
+router.get('/userdashboard/:username',(req,res)=>{
+    console.log(req.params.username)
+    // you can use res.rended('page',{data:{}})
+    res.json({
+        Hello:req.params.username
+    })
 
 });
+
+
+router.post("/signup", function (req, res) {
+    // console.log(req.body)
+    //
+    //
+    // db.User.create({
+    //     email: "tom@myspace.com",
+    //     password: "password1",
+    //     age: 46,
+    //     name: "Tom Anderson"
+    // }).then(function(dbUser){
+    //     console.log(dbUser);
+    //
+    // })
+    // .catch(function(error){
+    //     console.log(error)
+    //     }) ;
+});
+
 
 //post router on getting property API
 router.post("/listings", function (req, res) {
@@ -145,6 +156,11 @@ router.post("/listings", function (req, res) {
     //===============================================================================================================================================
 
 
+
+
+
+
+
     request({
         url: baseURL,
         method: "GET",
@@ -153,9 +169,21 @@ router.post("/listings", function (req, res) {
             accept: "application/json"
         }
     }, function (error, response, body) {
-        // console.log(body);
-        return res.send({result: "redirect", url: "/listings", data: body});
-        //return res.status(200).send({result: "redirect", url: "/listings", data: body});
+        // console.log(response)
+        var body = JSON.parse(body);
+        var data = body.property.map(function(p) {
+            return {
+                property: p,
+                address: p.address.oneLine,
+                marketValue: p.assessment.market.mktttlvalue,
+                Taxes: p.assessment.tax.taxamt,
+                yearBuilt: p.summary.yearbuilt
+            }
+
+        })
+
+        res.json(data);
+
 
     });
 
@@ -170,7 +198,6 @@ router.post("/admin/newblog",function (req, res) {
             res.status(200).end()
         });
 });
-
 
 
 //Export routes for homesServer.js to use

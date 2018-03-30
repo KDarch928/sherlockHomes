@@ -5,45 +5,38 @@
                 <p1 id="title">
                     Create an Account
                 </p1>
-
                 <div id="property-view"></div>
                 <!-- create an account -->
                 <!--<form id="user-form" action="/admin" method="POST">-->
                 <form id="signup-form">
-
-                    <label id="firstLabel" for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="ftNam">
+                    <label for="first_name">First Name</label>
+                    <input type="text" id="first_name" name="ftNam" value="John">
                     <br>
-                    <label id="firstLabel2" for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="ltNam">
+                    <label for="last_name">Last Name</label>
+                    <input type="text" id="last_name" name="ltNam" value="Doe">
                     <br>
-                    <label id="firstLabel3" for="company_name">Company Name</label>
-                    <input type="text" id="company_name" name="company">
+                    <label for="company_name">Company Name</label>
+                    <input type="text" id="company_name" name="company" value="Homes">
                     <br>
-                    <label id="firstLabel4" for="email-input">Email</label>
-                    <input type="text" id="email-input" name="email">
+                    <label for="email-input">Email</label>
+                    <input type="text" id="email-input" name="email" value="Casa@homes.com">
                     <br>
-                    <label id="firstLabel5" for="pwd-input1">Password</label>
-                    <input type="password" id="pwd-input1" name="pwd" required>
+                    <label for="pwd-input1">Password</label>
+                    <input type="password" id="pwd-input1" name="pwd" required value="password">
                     <input type="checkbox" onclick="showPwd('pwd-input1')">Show Password
                     <br>
-                    <label id="firstLabel6" for="pwd-input2">Confirm Password</label>
-                    <input type="password" id="pwd-input2" name="pwd" required>
-                    <input id="checkboxSign" type="checkbox" onclick="showPwd('pwd-input2')">Show Password
+                    <label for="pwd-input2">Confirm Password</label>
+                    <input type="password" id="pwd-input2" name="pwd" required value="password">
+                    <input type="checkbox" onclick="showPwd('pwd-input2')">Show Password
                     <br>
-                    <input id="find-user" type="submit" value="Sign Up">
+                    <input id="signup-form" type="submit" value="Sign Up">
                 </form>
             </div>
-
-
         </div>
     </div>
     </div>
-
 </header>
-
 <script type="text/javascript">
-
     function showPwd(element) {
         var x = document.getElementById(element);
         if (x.type === "password"){
@@ -53,7 +46,8 @@
         }
     }
 
-    $("#signup-form").on("submit", function(event) {
+    $("#signup-form").on("click", function(event) {
+        event.preventDefault()
         var ftNam = $("#first_name").val().trim();
         var ltNam = $("#last_name").val().trim();
         var comp = $("#company_name").val().trim();
@@ -62,23 +56,24 @@
 
         var newUrsData = {
             firstName: ftNam,
-            lastName: ltNam
+            lastName: ltNam,
             company: comp,
             email: email,
             pwd: pwd
         };
-
+        console.log(newUrsData)
         // Send the post request.
         $.ajax("/signup", {
-            type: "POST",
-            data: newUrsData
-        }).then(
-                function() {
-                    // Reload the page to get the updated list
-                    console.log("I made it to this funciton");
-                    // location.reload();
-                }
-        );
+            url: "/signup",
+            method: "POST", //First change type to method here
+            data: newUrsData,
+            success: function (response) {
+                window.location.replace(`/userdashboard/${newUrsData.firstName}`);
+            },
+            error: function (error) {
+                alert(JSON.stringify(error));
+            }
+        });
     });
 
 
