@@ -141,25 +141,16 @@ router.post("/signup", function (req, res) {
 
 
 //post router on getting property API
-router.post("/listings", function (req, res) {
+router.post("/testRoute", function (req, res) {
     console.log(req.body);
     console.log("post route fired");
-
-    var addr = req.body.addr;
-    var apt = req.body.apt;
     var state = req.body.state;
     var city = req.body.city;
-    var zipcode = req.body.zip;
+    var zipcode = req.body.zipcode;
 
     var baseURL = 'https://search.onboard-apis.com/propertyapi/v1.0.0/assessment/detail?postalcode=' + zipcode;
 
     //===============================================================================================================================================
-
-
-
-
-
-
 
     request({
         url: baseURL,
@@ -171,16 +162,17 @@ router.post("/listings", function (req, res) {
     }, function (error, response, body) {
         // console.log(response)
         var body = JSON.parse(body);
-        var data = body.property.map(function(p) {
+        var data = body.property.map(function (p) {
             return {
-                property: p,
+
                 address: p.address.oneLine,
                 marketValue: p.assessment.market.mktttlvalue,
                 Taxes: p.assessment.tax.taxamt,
                 yearBuilt: p.summary.yearbuilt
             }
 
-        })
+        });
+        console.log(data);
 
         res.json(data);
 
