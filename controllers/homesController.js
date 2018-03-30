@@ -27,18 +27,16 @@ router.get("/realtor/:name", function (req, res) {
 
 //sherlock homes admin page
 router.get("/admin", function (req, res) {
-    // var name = req.params.name;
-    // console.log(name);
-    notifier.notify("Successfully Logged In");
-    home.allBlogs(function (data) {
-        var blogData = {
-            blog: data
-        }
-        console.log(blogData);
-        res.render("admin", blogData);
-    });
-    //res.render("admin");
     // notifier.notify("Successfully Logged In");
+    home.allBlogs(function (data) {
+
+        var hbsObject = {
+            blogs: data
+        };
+        res.render("admin", hbsObject);
+    });
+
+    notifier.notify("Successfully Logged In");
 });
 
 router.get("/login",function (req,res) {
@@ -63,15 +61,6 @@ router.get("/blog", function (req, res) {
     //res.render("blog", blogData);
 });
 
-// router.get("/admin/all", function (req, res) {
-//     home.allBlogs(function (data) {
-//         var blogData = {
-//             blog: data
-//         }
-//         res.render("admin", blogData);
-//     });
-//
-// });
 
 //all post routes
 
@@ -163,8 +152,7 @@ router.post("/listings", function (req, res) {
 });
 
 router.post("/admin/newblog",function (req, res) {
-    console.log("I hit the newBlog post");
-    console.log(req.body);
+
     home.insertBlog(["title_header","title_descrip","created_at","blog_content"],
         [req.body.header, req.body.title, req.body.created_at, req.body.cont], function (result) {
             //res.end();
