@@ -29,11 +29,10 @@ router.get("/realtor/:name", function (req, res) {
 router.get("/admin", function (req, res) {
     // notifier.notify("Successfully Logged In");
     home.allBlogs(function (data) {
-        console.log(data);
-        var hbsObject = {
-            blogs: data
-        };
-        res.render("admin", hbsObject);
+        var blogData = {
+            blog: data
+        }
+        res.render("admin", blogData);
     });
 
     notifier.notify("Successfully Logged In");
@@ -169,7 +168,7 @@ router.post("/admin/newblog",function (req, res) {
     home.insertBlog(["title_header","title_descrip","created_at","blog_content"],
         [req.body.header, req.body.title, req.body.created_at, req.body.cont], function (result) {
             //res.end();
-            return res.status(200).end()
+            res.status(200).end()
         });
 });
 
