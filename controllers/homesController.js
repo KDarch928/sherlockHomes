@@ -8,7 +8,7 @@ var router = express.Router();
 var notifier = require('node-notifier');
 
 
-//create all routes
+//create all route
 
 //all get routes
 
@@ -130,6 +130,7 @@ router.post("/signup", function (req, res) {
 
 });
 
+
 //post router on getting property API
 router.post("/listings", function (req, res) {
     console.log(req.body);
@@ -146,6 +147,11 @@ router.post("/listings", function (req, res) {
     //===============================================================================================================================================
 
 
+
+
+
+
+
     request({
         url: baseURL,
         method: "GET",
@@ -154,9 +160,32 @@ router.post("/listings", function (req, res) {
             accept: "application/json"
         }
     }, function (error, response, body) {
-        // console.log(body);
-        return res.send({result: "redirect", url: "/listings", data: body});
-        //return res.status(200).send({result: "redirect", url: "/listings", data: body});
+        // console.log(response)
+        var body = JSON.parse(body);
+        var data = body.property.map(function(p) {
+            return {
+                property: p,
+                address: p.address.oneLine,
+                marketValue: p.assessment.market.mktttlvalue,
+                Taxes: p.assessment.tax.taxamt,
+                yearBuilt: p.summary.yearbuilt
+            }
+
+        })
+
+        res.json(data);
+        // res.json(data1);
+        // res.send(JSON.parse(body))
+    //    var propertiesArray = JSON.parse(body).property;
+    //    // console.log(propertiesArray);
+
+    //     // res.json(propertiesArray);
+    //     // console.log(propertiesArray);
+
+    //     propertiesArray.forEach(function(property) {
+    //         res.json(property);
+    //     });
+
 
     });
 
@@ -171,7 +200,6 @@ router.post("/admin/newblog",function (req, res) {
             res.status(200).end()
         });
 });
-
 
 
 //Export routes for homesServer.js to use
