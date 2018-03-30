@@ -162,12 +162,11 @@ router.post("/listings", function (req, res) {
 });
 
 router.post("/admin/newblog",function (req, res) {
-    console.log("I hit the newBlog post");
-    console.log(req.body);
+
     home.insertBlog(["title_header","title_descrip","created_at","blog_content"],
         [req.body.header, req.body.title, req.body.created_at, req.body.cont], function (result) {
             //res.end();
-            return res.status(200).end()
+            res.status(200).end()
         });
 });
 
