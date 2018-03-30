@@ -10,24 +10,67 @@
 
                 </div>
                 <!-- Find a rental address -->
-                <form id="property-form" action="/listings" method="POST">
+  <form id="property-form" action="/testRoute" method="POST">
+    <label for="property-input">City</label>
+    <input type="text" id="city-input" name="city">
+    <br>
+    <label for="property-input">State</label>
+    <input type="text" id="state-input" name="state">
+    <br>
+    <label for="property-input">zipcode</label>
+    <input type="text" id="zip-input" name="zipcode">
+    <br>
+    <input id="find-property" type="submit" value="Property Search">
+    </form>
 
-                    <label for="address-input">Address</label>
-                    <input type="text" id="address-input" name="address" required>
-                    <br>
-                    <label for="aptnum-input">Suite/Apt/Unit Number</label>
-                    <input type="text" id="aptnum-input" name="aptnum">
-                    <br>
-                    <label for="city-input">City</label>
-                    <input type="text" id="city-input" name="city" required>
-                    <br>
-                    <label for="state-input">State</label>
-                    <input type="text" id="state-input" name="state" required>
-                    <br>
-                    <label for="zip-input">Zip</label>
-                    <input type="text" id="zip-input" name="zip" required>
-                    <input id="find-property" type="submit" value="Property Search">
-                </form>
+
+                    {{!-- <script = "text/javascript">
+
+                        var state = $("#state-input").val().trim();
+                        var city = $("#city-input").val().trim();
+                        var zipcode = $("#zipcode-input").val().trim();
+
+                        $("#property-form").on("sumbit", function() {
+                            console.log("clicked")
+                            var baseURL = "localhost:8080/listingresults"
+                            //
+                            //
+                            //
+    request({
+      url: baseURL,
+      method: "GET",
+      headers: {
+        apikey: "4b1160e947405c82fcd5633d6fa81929",
+        accept: "application/json"
+      }
+     },function(error,response,body){
+       // console.log(response)
+       // console.log(body)
+       return res.send(body);
+
+   }) --}}
+
+{{!--
+                           // $.ajax({
+                             //   url: queryURL,
+                               // method: "POST",
+                               // body: {
+                                //    state,
+                                //    city
+                               // }
+                            //}).then(function(response) {
+                              //  console.log(response)
+                                // $("#property-view").text(JSON.stringify(response));
+                           // });
+                        //})
+
+                        // $(document).ready(function(){
+
+                        //
+                        //            // ----------------------------------------------------------------------- --}}
+                        {{!-- //
+                        //          }); --}}
+                    </script>
 
             </div>
 
