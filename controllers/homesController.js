@@ -1,6 +1,5 @@
 var express = require("express");
 var request = require("request");
-var json2html = require('json-to-html')
 
 var home = require("../models/homesModel");
 
@@ -125,6 +124,7 @@ router.post("/testRoute", function (req, res) {
 
     
 
+
     request({
         url: baseURL,
         method: "GET",
@@ -134,22 +134,27 @@ router.post("/testRoute", function (req, res) {
         }
     }, function (error, response, body) {
         // console.log(response)
-        // console.log(body)
-       var propertiesArray = JSON.parse(body).property;
-       // console.log(propertiesArray);
-        // return res.send(body.property);
+        var body = JSON.parse(body);
+        var data = body.property.map(function(p) {
+            return p.address.oneLine
+        })
+        res.json(data)
+        // res.send(JSON.parse(body))
+    //    var propertiesArray = JSON.parse(body).property;
+    //    // console.log(propertiesArray);
 
-        propertiesArray.forEach(function(property) {
-            res.json(property.address)
-            console.log(property)
-        });
+    //     // res.json(propertiesArray);
+    //     // console.log(propertiesArray);
+
+    //     propertiesArray.forEach(function(property) {
+    //         res.json(property);
+    //     });
 
 
     });
 
 
 });
-
 
 
 //Export routes for homesServer.js to use
