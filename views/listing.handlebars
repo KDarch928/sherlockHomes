@@ -6,7 +6,9 @@
                     Listings
                 </p1>
 
-                <div id="property-view"></div>
+                <div id="property-view">
+
+                </div>
                 <!-- Find a rental address -->
   <form id="property-form" action="/testRoute" method="POST">
     <label for="property-input">City</label>
@@ -18,7 +20,7 @@
     <label for="property-input">zipcode</label>
     <input type="text" id="zip-input" name="zipcode">
     <br>
-    <input id="find-property" type="submit" value="Property Search"> 
+    <input id="find-property" type="submit" value="Property Search">
     </form>
 
 
@@ -45,10 +47,10 @@
        // console.log(response)
        // console.log(body)
        return res.send(body);
-     
+
    }) --}}
 
-{{!-- 
+{{!--
                            // $.ajax({
                              //   url: queryURL,
                                // method: "POST",
@@ -78,3 +80,79 @@
     </div>
 
 </header>
+
+<script id="list-temp" type="text/template">
+        {{list}}
+
+</script>
+
+
+<script type="text/javascript">
+
+    $("#property-form").on("submit", function(event) {
+        event.preventDefault();
+
+        var addr = $("#address-input").val().trim();
+        var apt = $("#aptnum-input").val().trim();
+        var city = $("#city-input").val().trim();
+        var state = $("#state-input").val().trim();
+        var zip = $("#zip-input").val().trim();
+
+
+
+
+        var collectedSearchData = {
+            addr: addr,
+            apt: apt,
+            city: city,
+            state: state,
+            zip: zip
+        };
+        // console.log(json(collectedSearchData));
+
+        // Send the post request.
+        $.ajax("/listings", {
+            type: "POST",
+            data: collectedSearchData
+        }).then( function(response) {
+                    //Reload the page to get the updated list
+                    // if (response.result === "redirect") {
+                    //     console.log(response.body);
+                    // }
+            var renderListing = function (url, anchor) {
+                $.getJSON(url, function(data) {
+                    var template = "{{total}}";
+                    var stone = Handlebars.compile(template)(data);
+                    $(anchor).append(stone);
+                });
+            }
+
+            renderListing(response.data, "#property-view")
+
+            console.log(JSON.stringify(response.data));
+        });
+    });
+    // var state = req.body.state;
+    // var city = req.body.city;
+    // var zipcode = req.body.zipcode;
+
+    // var baseURL = 'https://search.onboard-apis.com/propertyapi/v1.0.0/assessment/detail?postalcode=' + zipcode;
+    //
+    // //===============================================================================================================================================
+    //
+    //
+    // request({
+    //     url: baseURL,
+    //     method: "GET",
+    //     headers: {
+    //         apikey: "4b1160e947405c82fcd5633d6fa81929",
+    //         accept: "application/json"
+    //     }
+    // }, function (error, response, body) {
+    //     // console.log(response)
+    //     // console.log(body)
+    //     return res.send(body);
+    //
+    // });
+
+</script>

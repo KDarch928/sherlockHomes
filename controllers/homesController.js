@@ -27,10 +27,16 @@ router.get("/realtor/:name", function (req, res) {
 
 //sherlock homes admin page
 router.get("/admin", function (req, res) {
-    var name = req.params.name;
-    console.log(name);
+    // var name = req.params.name;
+    // console.log(name);
     notifier.notify("Successfully Logged In");
-    res.render("admin");
+    home.allBlogs(function (data) {
+        var blogData = {
+            blog: data
+        }
+        res.render("admin", blogData);
+    });
+    //res.render("admin");
     // notifier.notify("Successfully Logged In");
 });
 
@@ -47,8 +53,24 @@ router.get("/listings", function (req, res) {
 });
 
 router.get("/blog", function (req, res) {
-    res.render("blog");
+    home.allBlogs(function (data) {
+        var blogData = {
+            blog: data
+        }
+        res.render("blog", blogData);
+    });
+    //res.render("blog", blogData);
 });
+
+// router.get("/admin/all", function (req, res) {
+//     home.allBlogs(function (data) {
+//         var blogData = {
+//             blog: data
+//         }
+//         res.render("admin", blogData);
+//     });
+//
+// });
 
 //all post routes
 
@@ -108,12 +130,15 @@ router.post("/signup", function (req, res) {
 
 
 //post router on getting property API
-router.post("/testRoute", function (req, res) {
+router.post("/listings", function (req, res) {
     console.log(req.body);
     console.log("post route fired");
+
+    var addr = req.body.addr;
+    var apt = req.body.apt;
     var state = req.body.state;
     var city = req.body.city;
-    var zipcode = req.body.zipcode;
+    var zipcode = req.body.zip;
 
     var baseURL = 'https://search.onboard-apis.com/propertyapi/v1.0.0/assessment/detail?postalcode=' + zipcode;
 
@@ -122,7 +147,7 @@ router.post("/testRoute", function (req, res) {
 
 
 
-    
+
 
 
     request({
@@ -143,7 +168,7 @@ router.post("/testRoute", function (req, res) {
                 Taxes: p.assessment.tax.taxamt,
                 yearBuilt: p.summary.yearbuilt
             }
-            
+
         })
 
         res.json(data);
@@ -163,6 +188,15 @@ router.post("/testRoute", function (req, res) {
     });
 
 
+});
+
+router.post("/admin/newblog",function (req, res) {
+
+    home.insertBlog(["title_header","title_descrip","created_at","blog_content"],
+        [req.body.header, req.body.title, req.body.created_at, req.body.cont], function (result) {
+            //res.end();
+            res.status(200).end()
+        });
 });
 
 
