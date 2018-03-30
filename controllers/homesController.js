@@ -1,7 +1,7 @@
 var express = require("express");
 var request = require("request");
 
-var home = require("../models/homesModel");
+// var home = require("../models/homesModel");
 
 var router = express.Router();
 
@@ -73,32 +73,30 @@ router.post("/login", function (req, res) {
             //if the user exist, then query the database. else redirect them to the sign up page
             if (result[0].total === 1){
 
+
                 //query the data and get users informaiton
                 home.validateUsrPwd(["email"],[
-                        req.body.username],
-                    function(result) {
+                    req.body.username],
+                function(result) {
 
-                        //if the username and pwd provide equal the same informin the database, then redirect them to the admin page
-                        //else redirect them back to the login page
-                        if (req.body.username === result[0].email && req.body.pwd === result[0].password) {
+                    //if the username and pwd provide equal the same informin the database, then redirect them to the admin page
+                    //else redirect them back to the login page
+                    if (req.body.username === result[0].email && req.body.pwd === result[0].password) {
 
-                            if(result[0].access_type === "admin"){
+                        if(result[0].access_type === "admin"){
 
-                                // return res.status(200).send({result: "redirect", url: "/admin"});
-                            } else {
-                                var name = result[0].first_name + " " + result[0].last_name;
-                                return res.status(200).send({result: "redirect", url: "/realtor/"+ name});
-                                // res.send({redirect: "/realtor/" + name});
-                            }
-                            // var name = result[0].first_name + " " + result[0].last_name;
-                            // res.redirect("/realtor/" + name);
-                            // notifier.notify("Successfully Logged In");
+                            return res.status(200).send({result: "redirect", url: "/admin"});
                         } else {
+                            var name = result[0].first_name + " " + result[0].last_name;
+                            return res.status(200).send({result: "redirect", url: "/realtor/"+ name});
+                            // res.send({redirect: "/realtor/" + name});
+                        }
+                        // var name = result[0].first_name + " " + result[0].last_name;
+                        // res.redirect("/realtor/" + name);
+                        // notifier.notify("Successfully Logged In");                        } else {
                             notifier.notify("Wrong Password");
                             return res.status(200).send({result: "redirect", url: "/login"});
-                            //notifier.notify("Wrong Password");
-
-
+                            //notifier.notify("Wrong Password")
                         }
                     });
             } else {
@@ -112,8 +110,31 @@ router.post("/login", function (req, res) {
 
 });
 
-router.post("/signup", function (req, res) {
+router.get('/userdashboard/:username',(req,res)=>{
+    console.log(req.params.username)
+    // you can use res.rended('page',{data:{}})
+    res.json({
+        Hello:req.params.username
+    })
 
+})
+router.post("/signup", function (req, res) {
+    console.log(req.body)
+
+    var db = require("../models");
+
+    db.User.create({
+        email: "tom@myspace.com",
+        password: "password1",
+        age: 46,
+        name: "Tom Anderson"
+    }).then(function(dbUser){
+        console.log(dbUser);
+        res.json("SUCCESS")
+    })
+    .catch(function(error){
+        console.log(error)
+        }   ) ;
 });
 
 

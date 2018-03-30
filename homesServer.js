@@ -1,10 +1,12 @@
 var express = require("express");
-
+var db = require("./models");
 var bodyParser = require("body-parser");
 
 var PORT = process.env.PORT || 8080;
 
 var app = express();
+
+
 
 // Serve static content for the app from the "public" directory in the application directory.
 app.use(express.static("public"));
@@ -26,8 +28,15 @@ var routes = require("./controllers/homesController.js");
 
 app.use(routes);
 
-// Start our server so that it can begin listening to client requests.
-app.listen(PORT, function() {
-    // Log (server-side) when our server has started
-    console.log("Server listening on: http://localhost:" + PORT);
+// // Start our server so that it can begin listening to client requests.
+// app.listen(PORT, function() {
+//     // Log (server-side) when our server has started
+//     console.log("Server listening on: http://localhost:" + PORT);
+// });
+console.log("here")
+db.sequelize.sync().then(function(){
+    app.listen(PORT, function(){
+        console.log("Listening on port %s", PORT);
+    });
 });
+
