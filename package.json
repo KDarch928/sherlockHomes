@@ -1,4 +1,4 @@
-n{
+{
   "name": "sherlockhomes",
   "version": "0.0.1",
   "description": "Finding a perfect home to build memories",
@@ -22,12 +22,10 @@ n{
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
     "jquery": "^3.3.1",
-    "json-editor": "^0.7.28",
-    "json-to-html": "^0.1.2",
     "mysql": "^2.15.0",
-    "mysql2": "^1.5.3",
     "node-notifier": "^5.2.1",
     "particlesjs": "^2.2.2",
-    "request": "^2.85.0"
+    "request": "^2.85.0",
+    "sequelize": "^4.37.5"
   }
 }
