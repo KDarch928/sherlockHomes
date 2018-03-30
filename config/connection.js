@@ -1,4 +1,4 @@
-// Set up MySQL connection.
+ho// Set up MySQL connection.
 var mysql = require("mysql");
 
 //setting up access to the .env file
