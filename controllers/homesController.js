@@ -1,5 +1,6 @@
 var express = require("express");
 var request = require("request");
+var json2html = require('json-to-html')
 
 var home = require("../models/homesModel");
 
@@ -106,6 +107,7 @@ router.post("/signup", function (req, res) {
 
 });
 
+
 //post router on getting property API
 router.post("/testRoute", function (req, res) {
     console.log(req.body);
@@ -119,6 +121,10 @@ router.post("/testRoute", function (req, res) {
     //===============================================================================================================================================
 
 
+
+
+    
+
     request({
         url: baseURL,
         method: "GET",
@@ -129,7 +135,15 @@ router.post("/testRoute", function (req, res) {
     }, function (error, response, body) {
         // console.log(response)
         // console.log(body)
-        return res.send(body);
+       var propertiesArray = JSON.parse(body).property;
+       // console.log(propertiesArray);
+        // return res.send(body.property);
+
+        propertiesArray.forEach(function(property) {
+            res.json(property.address)
+            console.log(property)
+        });
+
 
     });
 
