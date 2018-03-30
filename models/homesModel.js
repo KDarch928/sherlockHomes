@@ -7,6 +7,11 @@ var home = {
             cb(res);
         });
     },
+    allBlogs: function (cb) {
+        orm.selectAll("blogs",function (res) {
+            cb(res);
+        });
+    },
     checkifUrsExist: function (cols, vals, cb) {
         orm.checkifUrsExist("realtor_list", cols, vals, function (res) {
             cb(res);
@@ -17,6 +22,11 @@ var home = {
     },
     validateUsrPwd: function (cols, vals, cb) {
         orm.validateUsr("realtor_list", cols, vals, function (res){
+            cb(res);
+        });
+    },
+    insertBlog: function (cols, vals, cb) {
+        orm.insert("blogs", cols, vals, function (res) {
             cb(res);
         });
     }

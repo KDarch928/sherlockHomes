@@ -27,10 +27,16 @@ router.get("/realtor/:name", function (req, res) {
 
 //sherlock homes admin page
 router.get("/admin", function (req, res) {
-    var name = req.params.name;
-    console.log(name);
+    // var name = req.params.name;
+    // console.log(name);
     notifier.notify("Successfully Logged In");
-    res.render("admin");
+    home.allBlogs(function (data) {
+        var blogData = {
+            blog: data
+        }
+        res.render("admin", blogData);
+    });
+    //res.render("admin");
     // notifier.notify("Successfully Logged In");
 });
 
@@ -47,8 +53,24 @@ router.get("/listings", function (req, res) {
 });
 
 router.get("/blog", function (req, res) {
-    res.render("blog");
+    home.allBlogs(function (data) {
+        var blogData = {
+            blog: data
+        }
+        res.render("blog", blogData);
+    });
+    //res.render("blog", blogData);
 });
+
+// router.get("/admin/all", function (req, res) {
+//     home.allBlogs(function (data) {
+//         var blogData = {
+//             blog: data
+//         }
+//         res.render("admin", blogData);
+//     });
+//
+// });
 
 //all post routes
 
@@ -107,12 +129,15 @@ router.post("/signup", function (req, res) {
 });
 
 //post router on getting property API
-router.post("/testRoute", function (req, res) {
+router.post("/listings", function (req, res) {
     console.log(req.body);
     console.log("post route fired");
+
+    var addr = req.body.addr;
+    var apt = req.body.apt;
     var state = req.body.state;
     var city = req.body.city;
-    var zipcode = req.body.zipcode;
+    var zipcode = req.body.zip;
 
     var baseURL = 'https://search.onboard-apis.com/propertyapi/v1.0.0/assessment/detail?postalcode=' + zipcode;
 
@@ -127,13 +152,23 @@ router.post("/testRoute", function (req, res) {
             accept: "application/json"
         }
     }, function (error, response, body) {
-        // console.log(response)
-        // console.log(body)
-        return res.send(body);
+        // console.log(body);
+        return res.send({result: "redirect", url: "/listings", data: body});
+        //return res.status(200).send({result: "redirect", url: "/listings", data: body});
 
     });
 
 
+});
+
+router.post("/admin/newblog",function (req, res) {
+    console.log("I hit the newBlog post");
+    console.log(req.body);
+    home.insertBlog(["title_header","title_descrip","created_at","blog_content","blog_content2"],
+        [req.body.header, req.body.title, req.body.created_at, req.body.cont, req.body.cont2], function (result) {
+            //res.end();
+            return res.status(200).end()
+        });
 });
 
 
