@@ -9,6 +9,7 @@
                 <div id="property-view">
 
                 </div>
+                <div>
                 <!-- Find a rental address -->
   <form id="property-form" action="/testRoute" method="POST">
     <label for="property-input">City</label>
@@ -23,54 +24,6 @@
     <input id="find-property" type="submit" value="Property Search">
     </form>
 
-
-                    {{!-- <script = "text/javascript">
-
-                        var state = $("#state-input").val().trim();
-                        var city = $("#city-input").val().trim();
-                        var zipcode = $("#zipcode-input").val().trim();
-
-                        $("#property-form").on("sumbit", function() {
-                            console.log("clicked")
-                            var baseURL = "localhost:8080/listingresults"
-                            //
-                            //
-                            //
-    request({
-      url: baseURL,
-      method: "GET",
-      headers: {
-        apikey: "4b1160e947405c82fcd5633d6fa81929",
-        accept: "application/json"
-      }
-     },function(error,response,body){
-       // console.log(response)
-       // console.log(body)
-       return res.send(body);
-
-   }) --}}
-
-{{!--
-                           // $.ajax({
-                             //   url: queryURL,
-                               // method: "POST",
-                               // body: {
-                                //    state,
-                                //    city
-                               // }
-                            //}).then(function(response) {
-                              //  console.log(response)
-                                // $("#property-view").text(JSON.stringify(response));
-                           // });
-                        //})
-
-                        // $(document).ready(function(){
-
-                        //
-                        //            // ----------------------------------------------------------------------- --}}
-                        {{!-- //
-                        //          }); --}}
-                    </script>
 
             </div>
 

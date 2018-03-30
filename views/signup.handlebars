@@ -9,7 +9,6 @@
                 <!-- create an account -->
                 <!--<form id="user-form" action="/admin" method="POST">-->
                 <form id="signup-form">
-<<<<<<< HEAD
                     <label for="first_name">First Name</label>
                     <input type="text" id="first_name" name="ftNam" value="John">
                     <br>
@@ -29,28 +28,6 @@
                     <label for="pwd-input2">Confirm Password</label>
                     <input type="password" id="pwd-input2" name="pwd" required value="password">
                     <input type="checkbox" onclick="showPwd('pwd-input2')">Show Password
-=======
-
-                    <label id="firstLabel" for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="ftNam">
-                    <br>
-                    <label id="firstLabel2" for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="ltNam">
-                    <br>
-                    <label id="firstLabel3" for="company_name">Company Name</label>
-                    <input type="text" id="company_name" name="company">
-                    <br>
-                    <label id="firstLabel4" for="email-input">Email</label>
-                    <input type="text" id="email-input" name="email">
-                    <br>
-                    <label id="firstLabel5" for="pwd-input1">Password</label>
-                    <input type="password" id="pwd-input1" name="pwd" required>
-                    <input type="checkbox" onclick="showPwd('pwd-input1')">Show Password
-                    <br>
-                    <label id="firstLabel6" for="pwd-input2">Confirm Password</label>
-                    <input type="password" id="pwd-input2" name="pwd" required>
-                    <input id="checkboxSign" type="checkbox" onclick="showPwd('pwd-input2')">Show Password
->>>>>>> c570cb8f398e5be1f93b59edbe7149c286325999
                     <br>
                     <input id="signup-form" type="submit" value="Sign Up">
                 </form>
@@ -84,7 +61,7 @@
             email: email,
             pwd: pwd
         };
-        console.log(newUrsData) 
+        console.log(newUrsData)
         // Send the post request.
         $.ajax("/signup", {
             url: "/signup",
@@ -99,9 +76,5 @@
         });
     });
 
-<<<<<<< HEAD
-</script>
-=======
 
 </script>
->>>>>>> c570cb8f398e5be1f93b59edbe7149c286325999

@@ -1,7 +1,7 @@
 var express = require("express");
 var request = require("request");
 
-// var home = require("../models/homesModel");
+var home = require("../models/homesModel");
 
 var router = express.Router();
 
@@ -117,24 +117,25 @@ router.get('/userdashboard/:username',(req,res)=>{
         Hello:req.params.username
     })
 
-})
+});
+
+
 router.post("/signup", function (req, res) {
-    console.log(req.body)
-
-    var db = require("../models");
-
-    db.User.create({
-        email: "tom@myspace.com",
-        password: "password1",
-        age: 46,
-        name: "Tom Anderson"
-    }).then(function(dbUser){
-        console.log(dbUser);
-        res.json("SUCCESS")
-    })
-    .catch(function(error){
-        console.log(error)
-        }   ) ;
+    // console.log(req.body)
+    //
+    //
+    // db.User.create({
+    //     email: "tom@myspace.com",
+    //     password: "password1",
+    //     age: 46,
+    //     name: "Tom Anderson"
+    // }).then(function(dbUser){
+    //     console.log(dbUser);
+    //
+    // })
+    // .catch(function(error){
+    //     console.log(error)
+    //     }) ;
 });
 
 

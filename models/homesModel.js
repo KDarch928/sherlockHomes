@@ -30,31 +30,6 @@ var home = {
             cb(res);
         });
     }
-    // selectMailListing: function (cb) {
-    //     orm.selectAll("mail_listing", function (res) {
-    //         cb(res)
-    //     });
-    // },
-    // insertNewUser: function (cols, vals, cb) {
-    //     orm.insert("", cols, vals, function (res) {
-    //         cb(res);
-    //     });
-    // },
-    // insertNewListing: function (cols, vals, cb) {
-    //     orm.insert("", cols, vals, function (res) {
-    //         cb(res);
-    //     });
-    // },
-    // updateListing: function (objColVals, condition, cb) {
-    //     orm.update("", objColVals, condition, function (res) {
-    //         cb(res);
-    //     });
-    // },
-    // updateUser: function (objColVals, condition, cb) {
-    //     orm.update("", objColVals, condition, function (res) {
-    //         cb(res)
-    //     });
-    // }
 };
 
 //Export the database funciton form the controller (homesController.js)
