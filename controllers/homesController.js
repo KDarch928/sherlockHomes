@@ -137,7 +137,7 @@ router.post("/testRoute", function (req, res) {
         var body = JSON.parse(body);
         var data = body.property.map(function(p) {
             return {
-                property: p,
+                
                 address: p.address.oneLine,
                 marketValue: p.assessment.market.mktttlvalue,
                 Taxes: p.assessment.tax.taxamt,
@@ -147,17 +147,6 @@ router.post("/testRoute", function (req, res) {
         })
 
         res.json(data);
-        // res.json(data1);
-        // res.send(JSON.parse(body))
-    //    var propertiesArray = JSON.parse(body).property;
-    //    // console.log(propertiesArray);
-
-    //     // res.json(propertiesArray);
-    //     // console.log(propertiesArray);
-
-    //     propertiesArray.forEach(function(property) {
-    //         res.json(property);
-    //     });
 
 
     });
