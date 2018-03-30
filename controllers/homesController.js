@@ -8,7 +8,7 @@ var router = express.Router();
 var notifier = require('node-notifier');
 
 
-//create all routes
+//create all route
 
 //all get routes
 
@@ -137,7 +137,7 @@ router.post("/testRoute", function (req, res) {
         var body = JSON.parse(body);
         var data = body.property.map(function(p) {
             return {
-                // property: p,
+                property: p,
                 address: p.address.oneLine,
                 marketValue: p.assessment.market.mktttlvalue,
                 Taxes: p.assessment.tax.taxamt,
@@ -145,10 +145,7 @@ router.post("/testRoute", function (req, res) {
             }
             
         })
-        // var data1 = body.property.map(function(p) {
-        //     return p.assessment.market.mktttlvalue
-            
-        // })
+
         res.json(data);
         // res.json(data1);
         // res.send(JSON.parse(body))
