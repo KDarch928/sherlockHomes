@@ -15,4 +15,16 @@ CREATE TABLE realtor_list (
     PRIMARY KEY (id)
 );
 
+CREATE TABLE blogs (
+  id Int( 11 ) AUTO_INCREMENT NOT NULL,
+  title_header VARCHAR(255) NOT NULL,
+  title_descrip VARCHAR( 255) NOT NULL,
+  created_at VARCHAR(100) NOT NULL,
+  blog_content VARCHAR(1000 ) NOT NULL,
+  ts TIMESTAMP,
+
+  PRIMARY KEY ( id )
+);
+
 select * from realtor_list;
+select * from blogs;

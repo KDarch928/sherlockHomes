@@ -1,1 +1,152 @@
-<p>Admin Page</p>
+<header class="startup text-center text-white d-flex">
+    <div class="container my-auto">
+        <div class="row">
+            <div class="col-lg-12 my-auto">
+                <p1 id="title">
+                    Admin Page
+                </p1>
+                <!-- Find a rental address -->
+                <form id="blog-form">
+
+                    <label for="header-input">Blog Header</label>
+                    <input type="text" id="header-input" name="header" required>
+                    <br>
+                    <label for="title-input">Blog Title</label>
+                    <input type="text" id="title-input" name="title">
+                    <br>
+                    <label for="content-input">Content</label>
+                    <input type="text" id="content-input" name="content" required>
+                    <br>
+                    <textarea class="form-control" rows="3" id="test-input"></textarea>
+                    <br>
+                    <label for="content2-input">Additional Content</label>
+                    <input type="text" id="content2-input" name="content2">
+                    <br>
+                    <input id="postBlog" type="submit" value="Post">
+                    <!--<button id="blog-submit" class="btn btn-sm">Submit!</button>-->
+                    <br>
+                </form>
+                <br>
+
+                <h4>Created Blogs</h4>
+                <div id="blog-area">
+
+                </div>
+
+            </div>
+
+
+        </div>
+    </div>
+    </div>
+
+</header>
+
+
+<script type="text/javascript">
+
+    // $("#blog-form").on("submit", function(event) {
+    //     event.preventDefault();
+    //
+    //     var head = $("#header-input").val().trim();
+    //     var title = $("#title-input").val().trim();
+    //     var cont = $("#content-input").val().trim();
+    //     var cont2 = $("#content2-input").val().trim();
+    //
+    //
+    //
+    //
+    //     var newBlog = {
+    //         header: head,
+    //         title: title,
+    //         cont: cont,
+    //         cont2: cont2
+    //     };
+    //     // console.log(json(collectedSearchData));
+    //
+    //     // Send the post request.
+    //     $.ajax("/blog/new", {
+    //         type: "POST",
+    //         data: collectedData
+    //     }).done( function(response) {
+    //
+    //         console.log(response);
+    //     });
+    // });
+
+    $.get("/admin", function(data) {
+
+        console.log(data);
+        // if (data.length !== 0) {
+        //
+        //     for (var i = 0; i < data.length; i++) {
+        //
+        //         var row = $("<div>");
+        //         row.addClass("blog");
+        //
+        //         row.append("<p>" + data[i].header + " </p>");
+        //         row.append("<p>" + data[i].title + "</p>");
+        //         row.append("<p>" + data[i].created_at + "</p>");
+        //         row.append("<p>" + data[i].cont + "</p>");
+        //         row.append("<p>" + data[i].cont2 + "</p>");
+        //
+        //         $("#blog-area").prepend(row);
+        //
+        //     }
+        //
+        // }
+
+    });
+
+    // When user chirps (clicks addBtn)
+    $("#blog-form").on("submit", function(event) {
+        event.preventDefault();
+
+        var head = $("#header-input").val().trim();
+        var title = $("#title-input").val().trim();
+        var created = moment().format("MMMM DD, YYYY");
+        var content = $("#content-input").val().trim();
+        var content2 = $("#content2-input").val().trim();
+
+        // Make a newBlog object
+
+        var newBlog = {
+            header: head,
+            title: title,
+            created_at: created,
+            cont: content,
+            cont2: content2
+        };
+
+        console.log(newBlog);
+
+        // Send an AJAX POST-request with jQuery
+        $.post("/admin/newblog", newBlog)
+        // On success, run the following code
+                .then(function() {
+
+                    console.log(newBlog);
+
+                    var row = $("<div>");
+                    row.addClass("blog");
+
+                    row.append("<p>" + newBlog.header + " </p>");
+                    row.append("<p>" + newBlog.title + "</p>");
+                    row.append("<p>" + newBlog.created_at + "</p>");
+                    row.append("<p>" + newBlog.cont + "</p>");
+                    row.append("<p>" + newBlog.cont2 + "</p>");
+
+                    $("#blog-area").prepend(row);
+
+                });
+
+        // Empty each input box by replacing the value with an empty string
+        $("#header-input").val("");
+        $("#title-input").val("");
+        $("#content-input").val("");
+        $("#content2-input").val("");
+
+    });
+
+
+</script>
