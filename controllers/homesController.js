@@ -10,8 +10,6 @@ var notifier = require('node-notifier');
 
 //create all route
 
-//all get routes
-
 //root route to sherlock homes main page
 router.get("/", function (req, res) {
     res.render("index");
@@ -147,6 +145,10 @@ router.post("/testRoute", function (req, res) {
         })
 
         res.json(data);
+
+        for (var i = 0; i < data.length; i++) {
+            var animalDiv = $("<div>");
+            $("#gifs-appear-here").prepend(animalDiv);
 
 
     });

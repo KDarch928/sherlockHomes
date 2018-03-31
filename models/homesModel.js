@@ -7,6 +7,16 @@ var home = {
             cb(res);
         });
     },
+    allBlogs: function (cb) {
+        orm.selectAll("blogs",function (res) {
+            cb(res);
+        });
+    },
+    selectAllMailingList: function (cb) {
+        orm.selectAll("mailing_list", function (res) {
+            cb(res);
+        });
+    },
     checkifUrsExist: function (cols, vals, cb) {
         orm.checkifUrsExist("realtor_list", cols, vals, function (res) {
             cb(res);
@@ -19,32 +29,17 @@ var home = {
         orm.validateUsr("realtor_list", cols, vals, function (res){
             cb(res);
         });
+    },
+    insertBlog: function (cols, vals, cb) {
+        orm.insert("blogs", cols, vals, function (res) {
+            cb(res);
+        });
+    },
+    insertUsr: function (cols, vals, cb) {
+        orm.insert("realtor_list", cols, vals, function (res) {
+            cb(res);
+        });
     }
-    // selectMailListing: function (cb) {
-    //     orm.selectAll("mail_listing", function (res) {
-    //         cb(res)
-    //     });
-    // },
-    // insertNewUser: function (cols, vals, cb) {
-    //     orm.insert("", cols, vals, function (res) {
-    //         cb(res);
-    //     });
-    // },
-    // insertNewListing: function (cols, vals, cb) {
-    //     orm.insert("", cols, vals, function (res) {
-    //         cb(res);
-    //     });
-    // },
-    // updateListing: function (objColVals, condition, cb) {
-    //     orm.update("", objColVals, condition, function (res) {
-    //         cb(res);
-    //     });
-    // },
-    // updateUser: function (objColVals, condition, cb) {
-    //     orm.update("", objColVals, condition, function (res) {
-    //         cb(res)
-    //     });
-    // }
 };
 
 //Export the database funciton form the controller (homesController.js)

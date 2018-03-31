@@ -5,12 +5,8 @@
                 <p1 id="title">
                     Create an Account
                 </p1>
-
-                <div id="property-view"></div>
                 <!-- create an account -->
-                <!--<form id="user-form" action="/admin" method="POST">-->
                 <form id="signup-form">
-
                     <label for="first_name">First Name</label>
                     <input type="text" id="first_name" name="ftNam">
                     <br>
@@ -31,17 +27,13 @@
                     <input type="password" id="pwd-input2" name="pwd" required>
                     <input type="checkbox" onclick="showPwd('pwd-input2')">Show Password
                     <br>
-                    <input id="find-user" type="submit" value="Sign Up">
+                    <input id="formsubmitted" type="submit" value="Sign Up">
                 </form>
             </div>
-
-
         </div>
     </div>
     </div>
-
 </header>
-
 <script type="text/javascript">
 
     function showPwd(element) {
@@ -53,7 +45,8 @@
         }
     }
 
-    $("#signup-form").on("submit", function(event) {
+    $("#signup-form").on("click", function(event) {
+        event.preventDefault()
         var ftNam = $("#first_name").val().trim();
         var ltNam = $("#last_name").val().trim();
         var comp = $("#company_name").val().trim();
@@ -62,23 +55,30 @@
 
         var newUrsData = {
             firstName: ftNam,
-            lastName: ltNam
+            lastName: ltNam,
             company: comp,
             email: email,
             pwd: pwd
         };
 
         // Send the post request.
-        $.ajax("/signup", {
+        $.ajax("/signup/newuser", {
             type: "POST",
             data: newUrsData
-        }).then(
-                function() {
-                    // Reload the page to get the updated list
-                    console.log("I made it to this funciton");
-                    // location.reload();
-                }
-        );
+        }).done(function (response) {
+            // Reload the page to get the updated list
+            if (response.result === "redirect") {
+                location.href = response.url;
+            }
+        });
+
+        $("#first_name").val("");
+        $("#last_name").val("");
+        $("#company_name").val("");
+        $("#email-input").val("");
+        $("#pwd-input1").val("");
+        $("#pwd-input2").val("");
+
     });
 
 
