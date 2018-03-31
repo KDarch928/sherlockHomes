@@ -147,7 +147,7 @@ router.post("/signup/newuser", function (req, res) {
 
 
 //post router on getting property API
-router.post("/testRoute", function (req, res) {
+router.post("/listings/query", function (req, res) {
     console.log(req.body);
     console.log("post route fired");
     var state = req.body.state;

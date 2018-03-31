@@ -6,24 +6,28 @@
                     Listings
                 </p1>
 
+                <div>
+                <!-- Find a rental address -->
+                {{!-- //action="/testRoute" method="POST" --}}
+                    <form id="property-form">
+                        <label for="property-input">City</label>
+                        <input type="text" id="city-input" name="city">
+                        <br>
+                        <label for="property-input">State</label>
+                        <input type="text" id="state-input" name="state">
+                        <br>
+                        <label for="property-input">zipcode</label>
+                        <input type="text" id="zip-input" name="zipcode">
+                        <br>
+                        <input id="find-property" type="submit" value="Property Search">
+                    </form>
+
+
+                </div>
+
                 <div id="property-view">
 
                 </div>
-                <div>
-                <!-- Find a rental address -->
-  <form id="property-form" action="/testRoute" method="POST">
-    <label for="property-input">City</label>
-    <input type="text" id="city-input" name="city">
-    <br>
-    <label for="property-input">State</label>
-    <input type="text" id="state-input" name="state">
-    <br>
-    <label for="property-input">zipcode</label>
-    <input type="text" id="zip-input" name="zipcode">
-    <br>
-    <input id="find-property" type="submit" value="Property Search">
-    </form>
-
 
             </div>
 
@@ -33,79 +37,63 @@
     </div>
 
 </header>
-{{!--
-<script id="list-temp" type="text/template">
-        {{list}}
-
-</script>
-
 
 <script type="text/javascript">
 
-    $("#property-form").on("submit", function(event) {
+    // When user chirps (clicks addBtn)
+    $("#property-form").on("submit", function (event) {
         event.preventDefault();
 
-        var addr = $("#address-input").val().trim();
-        var apt = $("#aptnum-input").val().trim();
         var city = $("#city-input").val().trim();
         var state = $("#state-input").val().trim();
-        var zip = $("#zip-input").val().trim();
+        var zipcode = $("#zip-input").val().trim();
 
+        //Make new blog object
 
-
-
-        var collectedSearchData = {
-            addr: addr,
-            apt: apt,
+        var searchQuery = {
             city: city,
             state: state,
-            zip: zip
+            zipcode: zipcode
         };
-        // console.log(json(collectedSearchData));
 
-        // Send the post request.
-        $.ajax("/listings", {
+
+        // Send an AJAX POST-request with jQuery
+
+        $.ajax({
             type: "POST",
-            data: collectedSearchData
-        }).then( function(response) {
-                    //Reload the page to get the updated list
-                    // if (response.result === "redirect") {
-                    //     console.log(response.body);
-                    // }
-            var renderListing = function (url, anchor) {
-                $.getJSON(url, function(data) {
-                    var template = "{{total}}";
-                    var stone = Handlebars.compile(template)(data);
-                    $(anchor).append(stone);
-                });
+            data: searchQuery,
+            url: "/listings/query"
+        }).then(function (res) {
+            console.log(res);
+
+            console.log(res[0].address);
+            console.log(res[0].Taxes);
+            console.log(res[0].marketValue);
+            console.log(res[0].yearBuilt);
+
+
+            for (var i = 0; i < res.length; i++){
+                var row = $("<div>");
+                row.addClass("home_listings");
+
+                row.append("<h4>" + res[i].address + "</h4>");
+                row.append("<p>Market Value: " + res[i].marketValue + "</p>");
+                row.append("<p>Taxes: " + res[i].Taxes + "</p>");
+                row.append("<p>Year Built: " + res[i].yearBuilt + "</p>");
+                $("#property-view").prepend(row);
             }
 
-            renderListing(response.data, "#property-view")
 
-            console.log(JSON.stringify(response.data));
         });
+
+
+
+        // Empty each input box by replacing the value with an empty string
+        $("#city-input").val("");
+        $("#state-input").val("");
+        $("#zip-input").val("");
+
     });
-    // var state = req.body.state;
-    // var city = req.body.city;
-    // var zipcode = req.body.zipcode;
 
-    // var baseURL = 'https://search.onboard-apis.com/propertyapi/v1.0.0/assessment/detail?postalcode=' + zipcode;
-    //
-    // //===============================================================================================================================================
-    //
-    //
-    // request({
-    //     url: baseURL,
-    //     method: "GET",
-    //     headers: {
-    //         apikey: "4b1160e947405c82fcd5633d6fa81929",
-    //         accept: "application/json"
-    //     }
-    // }, function (error, response, body) {
-    //     // console.log(response)
-    //     // console.log(body)
-    //     return res.send(body);
-    //
-    // });
 
-</script> --}}
+</script>
