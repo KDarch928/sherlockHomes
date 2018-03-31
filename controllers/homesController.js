@@ -18,7 +18,6 @@ router.get("/", function (req, res) {
 //landing page for realtors
 router.get("/realtor/:name", function (req, res) {
     var name = req.params.name;
-    console.log(name);
     res.render("realtor");
     notifier.notify("Successfully Logged In");
 });
@@ -103,9 +102,41 @@ router.post("/login", function (req, res) {
 
 });
 
+//adding new usering into the database
+router.post("/signup/newuser", function (req, res) {
 
-router.post("/signup", function (req, res) {
-    // console.log(req.body)
+    //check to see if the users email already exist in the system.
+    home.checkifUrsExist(["email"],[req.body.email], function (result) {
+
+        //if the user exist, then redirect them to the login page. else add the new user to the database
+        if (result[0].total === 1) {
+            //let the user know that the they exist in the database
+            notifier.notify("Your Account already exists!");
+            //redirect to login
+            return res.status(200).send({result: "redirect", url: "/login"});
+
+        } else {
+            //set access to user level
+            var access_type = "user";
+            //split the email
+            var emailChecker = req.body.email.split("@");
+
+            //if the email end with sherlockhomes.com, then upgrade the account to admin level access
+            if (emailChecker[1] === "sherlockhomes.com") {
+                access_type = "admin"
+            }
+
+            //insert the user in the database
+            home.insertUsr(["email","first_name","last_name","password","company","access_type"],[req.body.email, req.body.firstName, req.body.lastName, req.body.pwd, req.body.company, access_type], function (ressult) {
+                res.status(200).end()
+            });
+            //let the user know their account has been created
+            notifier.notify("Your account has been sucessuflly created");
+            //redirect to the login page
+            return res.status(200).send({ result: "redirect", url: "/login" });
+
+        }
+    });
 
 });
 
@@ -156,7 +187,6 @@ router.post("/admin/newblog",function (req, res) {
 
     home.insertBlog(["title_header","title_descrip","created_at","blog_content"],
         [req.body.header, req.body.title, req.body.created_at, req.body.cont], function (result) {
-            //res.end();
             res.status(200).end()
         });
 });
