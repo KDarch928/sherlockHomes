@@ -12,6 +12,11 @@ var home = {
             cb(res);
         });
     },
+    selectAllMailingList: function (cb) {
+        orm.selectAll("mailing_list", function (res) {
+            cb(res);
+        });
+    },
     checkifUrsExist: function (cols, vals, cb) {
         orm.checkifUrsExist("realtor_list", cols, vals, function (res) {
             cb(res);

@@ -26,5 +26,15 @@ CREATE TABLE blogs (
   PRIMARY KEY ( id )
 );
 
+ CREATE TABLE mailing_list (
+    id INT NOT NULL AUTO_INCREMENT,
+    email VARCHAR(100),
+    first_name VARCHAR(100) NULL,
+    last_name VARCHAR(100) NULL,
+    date TIMESTAMP,
+    PRIMARY KEY (id)
+);
+
 select * from realtor_list;
 select * from blogs;
+select * from mailing_list;

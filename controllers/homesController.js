@@ -18,7 +18,13 @@ router.get("/", function (req, res) {
 //landing page for realtors
 router.get("/realtor/:name", function (req, res) {
     var name = req.params.name;
-    res.render("realtor");
+    home.selectAllMailingList(function (data) {
+        var mailingData = {
+            mailings: data,
+            name: name
+        }
+        res.render("realtor", mailingData);
+    });
     notifier.notify("Successfully Logged In");
 });
 
@@ -30,7 +36,6 @@ router.get("/admin", function (req, res) {
         }
         res.render("admin", blogData);
     });
-
     notifier.notify("Successfully Logged In");
 });
 
