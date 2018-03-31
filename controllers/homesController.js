@@ -10,8 +10,6 @@ var notifier = require('node-notifier');
 
 //create all route
 
-//all get routes
-
 //root route to sherlock homes main page
 router.get("/", function (req, res) {
     res.render("index");
@@ -31,7 +29,6 @@ router.get("/admin", function (req, res) {
         var blogData = {
             blogs: data
         }
-        console.log(blogData);
         res.render("admin", blogData);
     });
 
@@ -53,11 +50,10 @@ router.get("/listings", function (req, res) {
 router.get("/blog", function (req, res) {
     home.allBlogs(function (data) {
         var blogData = {
-            blog: data
+            blogs: data
         }
         res.render("blog", blogData);
     });
-    //res.render("blog", blogData);
 });
 
 
@@ -85,58 +81,32 @@ router.post("/login", function (req, res) {
                     if (req.body.username === result[0].email && req.body.pwd === result[0].password) {
 
                         if(result[0].access_type === "admin"){
-
+                            notifier.notify("Successfully Logged In");
                             return res.status(200).send({result: "redirect", url: "/admin"});
                         } else {
                             var name = result[0].first_name + " " + result[0].last_name;
+                            notifier.notify("Successfully Logged In");
                             return res.status(200).send({result: "redirect", url: "/realtor/"+ name});
-                            // res.send({redirect: "/realtor/" + name});
                         }
-                        // var name = result[0].first_name + " " + result[0].last_name;
-                        // res.redirect("/realtor/" + name);
-                        // notifier.notify("Successfully Logged In");                        } else {
-                            notifier.notify("Wrong Password");
-                            return res.status(200).send({result: "redirect", url: "/login"});
-                            //notifier.notify("Wrong Password")
-                        }
-                    });
+                    } else {
+                        notifier.notify("Wrong Password");
+                        return res.status(200).send({result: "redirect", url: "/login"});
+                    }
+                });
+
             } else {
-                console.log("I made it to sign up page");
-                // res.redirect("/signup");
                 notifier.notify("You do not have an Account with Sherlock Homes! Please create an account");
                 return res.status(200).send({result: "redirect", url: "/signup"});
-                //notifier.notify("You do not have an Account with Sherlock Homes! Please create an account");
+
             }
         });
-
-});
-
-router.get('/userdashboard/:username',(req,res)=>{
-    console.log(req.params.username)
-    // you can use res.rended('page',{data:{}})
-    res.json({
-        Hello:req.params.username
-    })
 
 });
 
 
 router.post("/signup", function (req, res) {
     // console.log(req.body)
-    //
-    //
-    // db.User.create({
-    //     email: "tom@myspace.com",
-    //     password: "password1",
-    //     age: 46,
-    //     name: "Tom Anderson"
-    // }).then(function(dbUser){
-    //     console.log(dbUser);
-    //
-    // })
-    // .catch(function(error){
-    //     console.log(error)
-    //     }) ;
+
 });
 
 
