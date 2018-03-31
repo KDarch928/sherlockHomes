@@ -118,7 +118,7 @@ router.post("/signup/newuser", function (req, res) {
             //let the user know that the they exist in the database
             notifier.notify("Your Account already exists!");
             //redirect to login
-            return res.status(200).send({result: "redirect", url: "/login"});
+            return res.status(200).send({result: "redirect", url: "/signup"});
 
         } else {
             //set access to user level
@@ -138,7 +138,7 @@ router.post("/signup/newuser", function (req, res) {
             //let the user know their account has been created
             notifier.notify("Your account has been sucessuflly created");
             //redirect to the login page
-            return res.status(200).send({ result: "redirect", url: "/login" });
+            return res.status(200).send({ result: "redirect", url: "/signup" });
 
         }
     });
