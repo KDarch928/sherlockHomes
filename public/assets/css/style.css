@@ -204,11 +204,11 @@ html {
     margin-left: 55px;
   }
   #pwd-input1 {
-    margin-left: 122px;
+    margin-left: 38px;
   }
 
   #pwd-input2 {
-    margin-left: 85px;
+    margin-left: 2px;
   }
 
  #zip-input {
@@ -223,10 +223,62 @@ html {
    margin-left: 25px;
  }
 
+ #title-input {
+   margin-left: 13px;
+ }
+
+ #postBlog {
+   background-color: #49b5de;
+   font-weight: 700;
+   text-transform: uppercase;
+   border-radius: 300px;
+   font-family: 'Share Tech',
+   sans-serif;
+   color: white;
+   padding: 10px;
+   margin-top: 10px;
+ }
+
+ #blog-area {
+   padding-top: 20px;
+ }
+
+ tr {
+   padding-top: 20px;
+ }
+
+ #formsubmitted {
+    background-color: #49b5de;
+    font-weight: 700;
+    text-transform: uppercase;
+    border-radius: 300px;
+    font-family: 'Share Tech',
+    sans-serif;
+    color: white;
+    padding: 10px;
+    margin-top: 10px;
+ }
+
  /* #checkboxSign{
    margin-left: 10px;
  } */
 
  .home_listings {
    padding-top: 40px;
+ }
+
+ .form-control {
+     display: block;
+     width: 50%;
+     margin-left: auto;
+     margin-right: auto;
+     padding: .375rem .75rem;
+     font-size: 1rem;
+     line-height: 1.5;
+     color: #495057;
+     background-color: #fff;
+     background-clip: padding-box;
+     border: 1px solid #ced4da;
+     border-radius: .25rem;
+     transition: border-color .15s ease-in-out, box-shadow .15s ease-in-out;
  }
