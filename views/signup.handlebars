@@ -47,8 +47,8 @@
         }
     }
 
-    $("#signup-form").on("click", function(event) {
-        event.preventDefault()
+    $("#signup-form").on("submit", function(event) {
+        event.preventDefault();
         var ftNam = $("#first_name").val().trim();
         var ltNam = $("#last_name").val().trim();
         var comp = $("#company_name").val().trim();
@@ -73,14 +73,14 @@
                 location.href = response.url;
             }
 
-            $("#first_name").val("");
-            $("#last_name").val("");
-            $("#company_name").val("");
-            $("#email-input").val("");
-            $("#pwd-input1").val("");
-            $("#pwd-input2").val("");
         });
 
+        $("#first_name").val("");
+        $("#last_name").val("");
+        $("#company_name").val("");
+        $("#email-input").val("");
+        $("#pwd-input1").val("");
+        $("#pwd-input2").val("");
 
 
     });
