@@ -16,7 +16,7 @@
                         <label for="property-input">State</label>
                         <input type="text" id="state-input" name="state">
                         <br>
-                        <label for="property-input">zipcode</label>
+                        <label for="property-input">Zip Code</label>
                         <input type="text" id="zip-input" name="zipcode">
                         <br>
                         <input id="find-property" type="submit" value="Property Search">
@@ -75,7 +75,7 @@
             for (var i = 0; i < res.length; i++){
                 var row = $("<div>");
                 row.addClass("home_listings");
-
+                row.append("<hr>");
                 row.append("<h4>" + res[i].address + "</h4>");
                 row.append("<p>Market Value: " + res[i].marketValue + "</p>");
                 row.append("<p>Taxes: " + res[i].Taxes + "</p>");
