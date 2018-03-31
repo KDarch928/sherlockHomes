@@ -5,31 +5,29 @@
                 <p1 id="title">
                     Create an Account
                 </p1>
-                <div id="property-view"></div>
                 <!-- create an account -->
-                <!--<form id="user-form" action="/admin" method="POST">-->
                 <form id="signup-form">
                     <label for="first_name">First Name</label>
-                    <input type="text" id="first_name" name="ftNam" value="John">
+                    <input type="text" id="first_name" name="ftNam">
                     <br>
                     <label for="last_name">Last Name</label>
-                    <input type="text" id="last_name" name="ltNam" value="Doe">
+                    <input type="text" id="last_name" name="ltNam">
                     <br>
                     <label for="company_name">Company Name</label>
-                    <input type="text" id="company_name" name="company" value="Homes">
+                    <input type="text" id="company_name" name="company">
                     <br>
                     <label for="email-input">Email</label>
-                    <input type="text" id="email-input" name="email" value="Casa@homes.com">
+                    <input type="text" id="email-input" name="email">
                     <br>
                     <label for="pwd-input1">Password</label>
-                    <input type="password" id="pwd-input1" name="pwd" required value="password">
+                    <input type="password" id="pwd-input1" name="pwd" required>
                     <input type="checkbox" onclick="showPwd('pwd-input1')">Show Password
                     <br>
                     <label for="pwd-input2">Confirm Password</label>
-                    <input type="password" id="pwd-input2" name="pwd" required value="password">
+                    <input type="password" id="pwd-input2" name="pwd" required>
                     <input type="checkbox" onclick="showPwd('pwd-input2')">Show Password
                     <br>
-                    <input id="signup-form" type="submit" value="Sign Up">
+                    <input id="formsubmitted" type="submit" value="Sign Up">
                 </form>
             </div>
         </div>
@@ -37,6 +35,7 @@
     </div>
 </header>
 <script type="text/javascript">
+
     function showPwd(element) {
         var x = document.getElementById(element);
         if (x.type === "password"){
@@ -61,19 +60,25 @@
             email: email,
             pwd: pwd
         };
-        console.log(newUrsData)
+
         // Send the post request.
-        $.ajax("/signup", {
-            url: "/signup",
-            method: "POST", //First change type to method here
-            data: newUrsData,
-            success: function (response) {
-                window.location.replace(`/userdashboard/${newUrsData.firstName}`);
-            },
-            error: function (error) {
-                alert(JSON.stringify(error));
+        $.ajax("/signup/newuser", {
+            type: "POST",
+            data: newUrsData
+        }).done(function (response) {
+            // Reload the page to get the updated list
+            if (response.result === "redirect") {
+                location.href = response.url;
             }
         });
+
+        $("#first_name").val("");
+        $("#last_name").val("");
+        $("#company_name").val("");
+        $("#email-input").val("");
+        $("#pwd-input1").val("");
+        $("#pwd-input2").val("");
+
     });
 
 

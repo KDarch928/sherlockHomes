@@ -29,6 +29,11 @@ var home = {
         orm.insert("blogs", cols, vals, function (res) {
             cb(res);
         });
+    },
+    insertUsr: function (cols, vals, cb) {
+        orm.insert("realtor_list", cols, vals, function (res) {
+            cb(res);
+        });
     }
 };
 

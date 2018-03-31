@@ -10,8 +10,6 @@ var notifier = require('node-notifier');
 
 //create all route
 
-//all get routes
-
 //root route to sherlock homes main page
 router.get("/", function (req, res) {
     res.render("index");
@@ -20,7 +18,6 @@ router.get("/", function (req, res) {
 //landing page for realtors
 router.get("/realtor/:name", function (req, res) {
     var name = req.params.name;
-    console.log(name);
     res.render("realtor");
     notifier.notify("Successfully Logged In");
 });
@@ -31,7 +28,6 @@ router.get("/admin", function (req, res) {
         var blogData = {
             blogs: data
         }
-        console.log(blogData);
         res.render("admin", blogData);
     });
 
@@ -53,11 +49,10 @@ router.get("/listings", function (req, res) {
 router.get("/blog", function (req, res) {
     home.allBlogs(function (data) {
         var blogData = {
-            blog: data
+            blogs: data
         }
         res.render("blog", blogData);
     });
-    //res.render("blog", blogData);
 });
 
 
@@ -85,58 +80,64 @@ router.post("/login", function (req, res) {
                     if (req.body.username === result[0].email && req.body.pwd === result[0].password) {
 
                         if(result[0].access_type === "admin"){
-
+                            notifier.notify("Successfully Logged In");
                             return res.status(200).send({result: "redirect", url: "/admin"});
                         } else {
                             var name = result[0].first_name + " " + result[0].last_name;
+                            notifier.notify("Successfully Logged In");
                             return res.status(200).send({result: "redirect", url: "/realtor/"+ name});
-                            // res.send({redirect: "/realtor/" + name});
                         }
-                        // var name = result[0].first_name + " " + result[0].last_name;
-                        // res.redirect("/realtor/" + name);
-                        // notifier.notify("Successfully Logged In");                        } else {
-                            notifier.notify("Wrong Password");
-                            return res.status(200).send({result: "redirect", url: "/login"});
-                            //notifier.notify("Wrong Password")
-                        }
-                    });
+                    } else {
+                        notifier.notify("Wrong Password");
+                        return res.status(200).send({result: "redirect", url: "/login"});
+                    }
+                });
+
             } else {
-                console.log("I made it to sign up page");
-                // res.redirect("/signup");
                 notifier.notify("You do not have an Account with Sherlock Homes! Please create an account");
                 return res.status(200).send({result: "redirect", url: "/signup"});
-                //notifier.notify("You do not have an Account with Sherlock Homes! Please create an account");
+
             }
         });
 
 });
 
-router.get('/userdashboard/:username',(req,res)=>{
-    console.log(req.params.username)
-    // you can use res.rended('page',{data:{}})
-    res.json({
-        Hello:req.params.username
-    })
+//adding new usering into the database
+router.post("/signup/newuser", function (req, res) {
 
-});
+    //check to see if the users email already exist in the system.
+    home.checkifUrsExist(["email"],[req.body.email], function (result) {
 
+        //if the user exist, then redirect them to the login page. else add the new user to the database
+        if (result[0].total === 1) {
+            //let the user know that the they exist in the database
+            notifier.notify("Your Account already exists!");
+            //redirect to login
+            return res.status(200).send({result: "redirect", url: "/login"});
 
-router.post("/signup", function (req, res) {
-    // console.log(req.body)
-    //
-    //
-    // db.User.create({
-    //     email: "tom@myspace.com",
-    //     password: "password1",
-    //     age: 46,
-    //     name: "Tom Anderson"
-    // }).then(function(dbUser){
-    //     console.log(dbUser);
-    //
-    // })
-    // .catch(function(error){
-    //     console.log(error)
-    //     }) ;
+        } else {
+            //set access to user level
+            var access_type = "user";
+            //split the email
+            var emailChecker = req.body.email.split("@");
+
+            //if the email end with sherlockhomes.com, then upgrade the account to admin level access
+            if (emailChecker[1] === "sherlockhomes.com") {
+                access_type = "admin"
+            }
+
+            //insert the user in the database
+            home.insertUsr(["email","first_name","last_name","password","company","access_type"],[req.body.email, req.body.firstName, req.body.lastName, req.body.pwd, req.body.company, access_type], function (ressult) {
+                res.status(200).end()
+            });
+            //let the user know their account has been created
+            notifier.notify("Your account has been sucessuflly created");
+            //redirect to the login page
+            return res.status(200).send({ result: "redirect", url: "/login" });
+
+        }
+    });
+
 });
 
 
@@ -186,7 +187,6 @@ router.post("/admin/newblog",function (req, res) {
 
     home.insertBlog(["title_header","title_descrip","created_at","blog_content"],
         [req.body.header, req.body.title, req.body.created_at, req.body.cont], function (result) {
-            //res.end();
             res.status(200).end()
         });
 });

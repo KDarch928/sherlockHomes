@@ -18,17 +18,31 @@
                     <textarea class="form-control" rows="3" id="content-input"></textarea>
                     <br>
                     <input id="postBlog" type="submit" value="Post">
-                    <!--<button id="blog-submit" class="btn btn-sm">Submit!</button>-->
                     <br>
                 </form>
                 <br>
+                <br>
 
                 <h4>Created Blogs</h4>
+                <br>
                 <div id="blog-area">
-                    {{#each blogs}}
-                        <div>{{this.blog_content}}</div>
-                    {{/each}}
-
+                    <table boarder=1 frame=void rules=rows `style="width: 100%">
+                        <tr>
+                            <th>Header</th>
+                            <th>Title</th>
+                            <th>Date Created</th>
+                            <th>Message</th>
+                            <th></th>
+                        </tr>
+                        {{#each blogs}}
+                            <tr>
+                                <td>{{this.title_header}}</td>
+                                <td>{{this.title_descrip}}</td>
+                                <td>{{this.created_at}}</td>
+                                <td>{{this.blog_content}}</td>
+                            </tr>
+                        {{/each}}
+                    </table>
                 </div>
 
             </div>
@@ -52,7 +66,7 @@
         var created = moment().format("MMMM DD, YYYY");
         var content = $("#content-input").val().trim();
 
-        // Make a newBlog object
+        //Make new blog object
 
         var newBlog = {
             header: head,
@@ -68,17 +82,21 @@
                 .then(function() {
 
 
-                    var row = $("<div>");
-                    row.addClass("blog");
+                    //var row = $("<div>");
+                    //row.addClass("blog");
 
-                    row.append("<p>" + newBlog.header + " </p>");
-                    row.append("<p>" + newBlog.title + "</p>");
-                    row.append("<p>" + newBlog.created_at + "</p>");
-                    row.append("<p>" + newBlog.cont + "</p>");
+                    //row.append("<p>" + newBlog.header + " </p>");
+                    //row.append("<p>" + newBlog.title + "</p>");
+                    //row.append("<p>" + newBlog.created_at + "</p>");
+                    //row.append("<p>" + newBlog.cont + "</p>");
 
-                    $("#blog-area").prepend(row);
+                    //$("#blog-area").prepend(row);
+
+                    location.reload();
 
                 });
+
+
 
         // Empty each input box by replacing the value with an empty string
         $("#header-input").val("");
