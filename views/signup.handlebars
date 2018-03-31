@@ -72,14 +72,16 @@
             if (response.result === "redirect") {
                 location.href = response.url;
             }
+
+            $("#first_name").val("");
+            $("#last_name").val("");
+            $("#company_name").val("");
+            $("#email-input").val("");
+            $("#pwd-input1").val("");
+            $("#pwd-input2").val("");
         });
 
-        $("#first_name").val("");
-        $("#last_name").val("");
-        $("#company_name").val("");
-        $("#email-input").val("");
-        $("#pwd-input1").val("");
-        $("#pwd-input2").val("");
+
 
     });
 
